@@ -10,33 +10,165 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AdminRouteImport } from './routes/admin'
+import { Route as AuthRouteImport } from './routes/auth'
+import { Route as MeRouteImport } from './routes/me'
+import { Route as PayRouteImport } from './routes/pay'
+import { Route as SubadminRouteImport } from './routes/subadmin'
+import { Route as SuperadminRouteImport } from './routes/superadmin'
+import { Route as SubadminAuthRouteImport } from './routes/subadmin/auth'
+import { Route as SuperadminLoginRouteImport } from './routes/superadmin/login'
+import { Route as ApiPublicGeoRouteImport } from './routes/api/public/geo'
+import { Route as ApiPublicTelegramSubRouteImport } from './routes/api/public/telegram/$sub'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AdminRoute = AdminRouteImport.update({
+  id: '/admin',
+  path: '/admin',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AuthRoute = AuthRouteImport.update({
+  id: '/auth',
+  path: '/auth',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const MeRoute = MeRouteImport.update({
+  id: '/me',
+  path: '/me',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PayRoute = PayRouteImport.update({
+  id: '/pay',
+  path: '/pay',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SubadminRoute = SubadminRouteImport.update({
+  id: '/subadmin',
+  path: '/subadmin',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SuperadminRoute = SuperadminRouteImport.update({
+  id: '/superadmin',
+  path: '/superadmin',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SubadminAuthRoute = SubadminAuthRouteImport.update({
+  id: '/auth',
+  path: '/auth',
+  getParentRoute: () => SubadminRoute,
+} as any)
+const SuperadminLoginRoute = SuperadminLoginRouteImport.update({
+  id: '/login',
+  path: '/login',
+  getParentRoute: () => SuperadminRoute,
+} as any)
+const ApiPublicGeoRoute = ApiPublicGeoRouteImport.update({
+  id: '/api/public/geo',
+  path: '/api/public/geo',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiPublicTelegramSubRoute = ApiPublicTelegramSubRouteImport.update({
+  id: '/api/public/telegram/$sub',
+  path: '/api/public/telegram/$sub',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/admin': typeof AdminRoute
+  '/auth': typeof AuthRoute
+  '/me': typeof MeRoute
+  '/pay': typeof PayRoute
+  '/subadmin': typeof SubadminRouteWithChildren
+  '/superadmin': typeof SuperadminRouteWithChildren
+  '/subadmin/auth': typeof SubadminAuthRoute
+  '/superadmin/login': typeof SuperadminLoginRoute
+  '/api/public/geo': typeof ApiPublicGeoRoute
+  '/api/public/telegram/$sub': typeof ApiPublicTelegramSubRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/admin': typeof AdminRoute
+  '/auth': typeof AuthRoute
+  '/me': typeof MeRoute
+  '/pay': typeof PayRoute
+  '/subadmin': typeof SubadminRouteWithChildren
+  '/superadmin': typeof SuperadminRouteWithChildren
+  '/subadmin/auth': typeof SubadminAuthRoute
+  '/superadmin/login': typeof SuperadminLoginRoute
+  '/api/public/geo': typeof ApiPublicGeoRoute
+  '/api/public/telegram/$sub': typeof ApiPublicTelegramSubRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/admin': typeof AdminRoute
+  '/auth': typeof AuthRoute
+  '/me': typeof MeRoute
+  '/pay': typeof PayRoute
+  '/subadmin': typeof SubadminRouteWithChildren
+  '/superadmin': typeof SuperadminRouteWithChildren
+  '/subadmin/auth': typeof SubadminAuthRoute
+  '/superadmin/login': typeof SuperadminLoginRoute
+  '/api/public/geo': typeof ApiPublicGeoRoute
+  '/api/public/telegram/$sub': typeof ApiPublicTelegramSubRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/admin'
+    | '/auth'
+    | '/me'
+    | '/pay'
+    | '/subadmin'
+    | '/superadmin'
+    | '/subadmin/auth'
+    | '/superadmin/login'
+    | '/api/public/geo'
+    | '/api/public/telegram/$sub'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/admin'
+    | '/auth'
+    | '/me'
+    | '/pay'
+    | '/subadmin'
+    | '/superadmin'
+    | '/subadmin/auth'
+    | '/superadmin/login'
+    | '/api/public/geo'
+    | '/api/public/telegram/$sub'
+  id:
+    | '__root__'
+    | '/'
+    | '/admin'
+    | '/auth'
+    | '/me'
+    | '/pay'
+    | '/subadmin'
+    | '/superadmin'
+    | '/subadmin/auth'
+    | '/superadmin/login'
+    | '/api/public/geo'
+    | '/api/public/telegram/$sub'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AdminRoute: typeof AdminRoute
+  AuthRoute: typeof AuthRoute
+  MeRoute: typeof MeRoute
+  PayRoute: typeof PayRoute
+  SubadminRoute: typeof SubadminRouteWithChildren
+  SuperadminRoute: typeof SuperadminRouteWithChildren
+  ApiPublicGeoRoute: typeof ApiPublicGeoRoute
+  ApiPublicTelegramSubRoute: typeof ApiPublicTelegramSubRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -48,11 +180,113 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/admin': {
+      id: '/admin'
+      path: '/admin'
+      fullPath: '/admin'
+      preLoaderRoute: typeof AdminRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/auth': {
+      id: '/auth'
+      path: '/auth'
+      fullPath: '/auth'
+      preLoaderRoute: typeof AuthRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/me': {
+      id: '/me'
+      path: '/me'
+      fullPath: '/me'
+      preLoaderRoute: typeof MeRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/pay': {
+      id: '/pay'
+      path: '/pay'
+      fullPath: '/pay'
+      preLoaderRoute: typeof PayRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/subadmin': {
+      id: '/subadmin'
+      path: '/subadmin'
+      fullPath: '/subadmin'
+      preLoaderRoute: typeof SubadminRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/superadmin': {
+      id: '/superadmin'
+      path: '/superadmin'
+      fullPath: '/superadmin'
+      preLoaderRoute: typeof SuperadminRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/subadmin/auth': {
+      id: '/subadmin/auth'
+      path: '/auth'
+      fullPath: '/subadmin/auth'
+      preLoaderRoute: typeof SubadminAuthRouteImport
+      parentRoute: typeof SubadminRoute
+    }
+    '/superadmin/login': {
+      id: '/superadmin/login'
+      path: '/login'
+      fullPath: '/superadmin/login'
+      preLoaderRoute: typeof SuperadminLoginRouteImport
+      parentRoute: typeof SuperadminRoute
+    }
+    '/api/public/geo': {
+      id: '/api/public/geo'
+      path: '/api/public/geo'
+      fullPath: '/api/public/geo'
+      preLoaderRoute: typeof ApiPublicGeoRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/public/telegram/$sub': {
+      id: '/api/public/telegram/$sub'
+      path: '/api/public/telegram/$sub'
+      fullPath: '/api/public/telegram/$sub'
+      preLoaderRoute: typeof ApiPublicTelegramSubRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
+interface SubadminRouteChildren {
+  SubadminAuthRoute: typeof SubadminAuthRoute
+}
+
+const SubadminRouteChildren: SubadminRouteChildren = {
+  SubadminAuthRoute: SubadminAuthRoute,
+}
+
+const SubadminRouteWithChildren = SubadminRoute._addFileChildren(
+  SubadminRouteChildren,
+)
+
+interface SuperadminRouteChildren {
+  SuperadminLoginRoute: typeof SuperadminLoginRoute
+}
+
+const SuperadminRouteChildren: SuperadminRouteChildren = {
+  SuperadminLoginRoute: SuperadminLoginRoute,
+}
+
+const SuperadminRouteWithChildren = SuperadminRoute._addFileChildren(
+  SuperadminRouteChildren,
+)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AdminRoute: AdminRoute,
+  AuthRoute: AuthRoute,
+  MeRoute: MeRoute,
+  PayRoute: PayRoute,
+  SubadminRoute: SubadminRouteWithChildren,
+  SuperadminRoute: SuperadminRouteWithChildren,
+  ApiPublicGeoRoute: ApiPublicGeoRoute,
+  ApiPublicTelegramSubRoute: ApiPublicTelegramSubRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

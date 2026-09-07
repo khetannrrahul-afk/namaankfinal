@@ -1,0 +1,10 @@
+{
+  "name": "NAMAANK",
+  "short_name": "NAMAANK",
+  "description": "NAMAANK — Har Ank ke Rahasye. Chaldean + Lo Shu numerology report.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#062b23",
+  "theme_color": "#0f766e",
+  "icons": [{ "src": "/favicon.ico", "sizes": "64x64 32x32 24x24 16x16", "type": "image/x-icon" }]
+}
