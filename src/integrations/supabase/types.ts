@@ -14,16 +14,467 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      app_settings: {
+        Row: {
+          is_public: boolean
+          key: string
+          updated_at: string
+          value: string
+        }
+        Insert: {
+          is_public?: boolean
+          key: string
+          updated_at?: string
+          value?: string
+        }
+        Update: {
+          is_public?: boolean
+          key?: string
+          updated_at?: string
+          value?: string
+        }
+        Relationships: []
+      }
+      messages: {
+        Row: {
+          body: string
+          created_at: string
+          delivered_to_telegram: boolean
+          id: string
+          recipient_id: string
+          sender_id: string
+        }
+        Insert: {
+          body: string
+          created_at?: string
+          delivered_to_telegram?: boolean
+          id?: string
+          recipient_id: string
+          sender_id: string
+        }
+        Update: {
+          body?: string
+          created_at?: string
+          delivered_to_telegram?: boolean
+          id?: string
+          recipient_id?: string
+          sender_id?: string
+        }
+        Relationships: []
+      }
+      namaank_submissions: {
+        Row: {
+          birth_time: string
+          created_at: string
+          dob: string
+          email: string
+          gender: string
+          id: string
+          identity_key: string
+          is_active: boolean
+          lang: string
+          lat: number | null
+          lon: number | null
+          mobile: string
+          name: string
+          place: string
+          sub_admin_id: string | null
+          timezone: string
+          user_id: string | null
+        }
+        Insert: {
+          birth_time?: string
+          created_at?: string
+          dob?: string
+          email?: string
+          gender?: string
+          id?: string
+          identity_key?: string
+          is_active?: boolean
+          lang?: string
+          lat?: number | null
+          lon?: number | null
+          mobile?: string
+          name?: string
+          place?: string
+          sub_admin_id?: string | null
+          timezone?: string
+          user_id?: string | null
+        }
+        Update: {
+          birth_time?: string
+          created_at?: string
+          dob?: string
+          email?: string
+          gender?: string
+          id?: string
+          identity_key?: string
+          is_active?: boolean
+          lang?: string
+          lat?: number | null
+          lon?: number | null
+          mobile?: string
+          name?: string
+          place?: string
+          sub_admin_id?: string | null
+          timezone?: string
+          user_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "namaank_submissions_sub_admin_id_fkey"
+            columns: ["sub_admin_id"]
+            isOneToOne: false
+            referencedRelation: "sub_admins"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      notifications: {
+        Row: {
+          body: string
+          created_at: string
+          id: string
+          is_read: boolean
+          kind: string
+          recipient_id: string
+          title: string
+        }
+        Insert: {
+          body?: string
+          created_at?: string
+          id?: string
+          is_read?: boolean
+          kind?: string
+          recipient_id: string
+          title?: string
+        }
+        Update: {
+          body?: string
+          created_at?: string
+          id?: string
+          is_read?: boolean
+          kind?: string
+          recipient_id?: string
+          title?: string
+        }
+        Relationships: []
+      }
+      payments: {
+        Row: {
+          amount: number
+          created_at: string
+          currency: string
+          email: string | null
+          gateway: string
+          id: string
+          meta: Json
+          mobile: string | null
+          name: string | null
+          order_id: string | null
+          payment_id: string | null
+          purpose: string
+          status: string
+          sub_admin_id: string | null
+          user_id: string | null
+        }
+        Insert: {
+          amount?: number
+          created_at?: string
+          currency?: string
+          email?: string | null
+          gateway?: string
+          id?: string
+          meta?: Json
+          mobile?: string | null
+          name?: string | null
+          order_id?: string | null
+          payment_id?: string | null
+          purpose?: string
+          status?: string
+          sub_admin_id?: string | null
+          user_id?: string | null
+        }
+        Update: {
+          amount?: number
+          created_at?: string
+          currency?: string
+          email?: string | null
+          gateway?: string
+          id?: string
+          meta?: Json
+          mobile?: string | null
+          name?: string | null
+          order_id?: string | null
+          payment_id?: string | null
+          purpose?: string
+          status?: string
+          sub_admin_id?: string | null
+          user_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "payments_sub_admin_id_fkey"
+            columns: ["sub_admin_id"]
+            isOneToOne: false
+            referencedRelation: "sub_admins"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      profiles: {
+        Row: {
+          city: string
+          created_at: string
+          email: string
+          full_name: string
+          id: string
+          is_active: boolean
+          mobile: string
+          referral_code: string | null
+          referred_by: string | null
+        }
+        Insert: {
+          city?: string
+          created_at?: string
+          email?: string
+          full_name?: string
+          id: string
+          is_active?: boolean
+          mobile?: string
+          referral_code?: string | null
+          referred_by?: string | null
+        }
+        Update: {
+          city?: string
+          created_at?: string
+          email?: string
+          full_name?: string
+          id?: string
+          is_active?: boolean
+          mobile?: string
+          referral_code?: string | null
+          referred_by?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "profiles_referred_by_fkey"
+            columns: ["referred_by"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      report_access: {
+        Row: {
+          full_unlocked: boolean
+          full_unlocked_at: string | null
+          payment_id: string | null
+          short_unlocked: boolean
+          short_unlocked_at: string | null
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          full_unlocked?: boolean
+          full_unlocked_at?: string | null
+          payment_id?: string | null
+          short_unlocked?: boolean
+          short_unlocked_at?: string | null
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          full_unlocked?: boolean
+          full_unlocked_at?: string | null
+          payment_id?: string | null
+          short_unlocked?: boolean
+          short_unlocked_at?: string | null
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      social_actions: {
+        Row: {
+          action: string
+          created_at: string
+          id: string
+          sub_admin_id: string | null
+          user_id: string
+        }
+        Insert: {
+          action: string
+          created_at?: string
+          id?: string
+          sub_admin_id?: string | null
+          user_id: string
+        }
+        Update: {
+          action?: string
+          created_at?: string
+          id?: string
+          sub_admin_id?: string | null
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "social_actions_sub_admin_id_fkey"
+            columns: ["sub_admin_id"]
+            isOneToOne: false
+            referencedRelation: "sub_admins"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      sub_admin_bots: {
+        Row: {
+          bot_token: string
+          is_enabled: boolean
+          sub_admin_chat_id: string | null
+          sub_admin_id: string
+          super_admin_chat_id: string | null
+          updated_at: string
+        }
+        Insert: {
+          bot_token?: string
+          is_enabled?: boolean
+          sub_admin_chat_id?: string | null
+          sub_admin_id: string
+          super_admin_chat_id?: string | null
+          updated_at?: string
+        }
+        Update: {
+          bot_token?: string
+          is_enabled?: boolean
+          sub_admin_chat_id?: string | null
+          sub_admin_id?: string
+          super_admin_chat_id?: string | null
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "sub_admin_bots_sub_admin_id_fkey"
+            columns: ["sub_admin_id"]
+            isOneToOne: true
+            referencedRelation: "sub_admins"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      sub_admins: {
+        Row: {
+          created_at: string
+          email: string
+          facebook_url: string
+          full_report_price_inr: number
+          id: string
+          instagram_url: string
+          is_active: boolean
+          location: string
+          mobile: string
+          name: string
+          require_facebook: boolean
+          require_instagram: boolean
+          require_share: boolean
+          service_type: string
+          telegram_bot_link: string
+          username: string
+        }
+        Insert: {
+          created_at?: string
+          email?: string
+          facebook_url?: string
+          full_report_price_inr?: number
+          id: string
+          instagram_url?: string
+          is_active?: boolean
+          location?: string
+          mobile?: string
+          name?: string
+          require_facebook?: boolean
+          require_instagram?: boolean
+          require_share?: boolean
+          service_type?: string
+          telegram_bot_link?: string
+          username: string
+        }
+        Update: {
+          created_at?: string
+          email?: string
+          facebook_url?: string
+          full_report_price_inr?: number
+          id?: string
+          instagram_url?: string
+          is_active?: boolean
+          location?: string
+          mobile?: string
+          name?: string
+          require_facebook?: boolean
+          require_instagram?: boolean
+          require_share?: boolean
+          service_type?: string
+          telegram_bot_link?: string
+          username?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "sub_admins_id_fkey"
+            columns: ["id"]
+            isOneToOne: true
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      user_roles: {
+        Row: {
+          created_at: string
+          id: string
+          role: Database["public"]["Enums"]["app_role"]
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          role: Database["public"]["Enums"]["app_role"]
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          role?: Database["public"]["Enums"]["app_role"]
+          user_id?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      has_role: {
+        Args: {
+          _role: Database["public"]["Enums"]["app_role"]
+          _user_id: string
+        }
+        Returns: boolean
+      }
+      is_sub_admin: { Args: never; Returns: boolean }
+      is_super_admin: { Args: never; Returns: boolean }
+      my_sub_admin: { Args: never; Returns: string }
+      username_available: { Args: { _username: string }; Returns: boolean }
+      validate_referral_code: {
+        Args: { _code: string }
+        Returns: {
+          sub_admin_id: string
+          sub_admin_name: string
+        }[]
+      }
     }
     Enums: {
-      [_ in never]: never
+      app_role: "super_admin" | "sub_admin" | "admin" | "user"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -150,6 +601,8 @@ export type CompositeTypes<
 
 export const Constants = {
   public: {
-    Enums: {},
+    Enums: {
+      app_role: ["super_admin", "sub_admin", "admin", "user"],
+    },
   },
 } as const
