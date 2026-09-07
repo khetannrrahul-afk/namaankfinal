@@ -331,6 +331,7 @@ export type Database = {
       sub_admin_bots: {
         Row: {
           bot_token: string
+          bot_username: string
           is_enabled: boolean
           sub_admin_chat_id: string | null
           sub_admin_id: string
@@ -339,6 +340,7 @@ export type Database = {
         }
         Insert: {
           bot_token?: string
+          bot_username?: string
           is_enabled?: boolean
           sub_admin_chat_id?: string | null
           sub_admin_id: string
@@ -347,6 +349,7 @@ export type Database = {
         }
         Update: {
           bot_token?: string
+          bot_username?: string
           is_enabled?: boolean
           sub_admin_chat_id?: string | null
           sub_admin_id?: string
