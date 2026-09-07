@@ -228,12 +228,17 @@ export default function Report({
   a,
   onReset,
   onLangChange,
+  skipGate = false,
+  initialFull = false,
 }: {
   a: Analysis;
   onReset: () => void;
   onLangChange: (l: Lang) => void;
+  /** Account panel se report kholte waqt gate/payment pehle hi verify ho chuka hota hai. */
+  skipGate?: boolean;
+  initialFull?: boolean;
 }) {
-  const [full, setFull] = useState(false);
+  const [full, setFull] = useState(initialFull);
   const [paying, setPaying] = useState(false);
   const [payError, setPayError] = useState<string | null>(null);
   const [payStage, setPayStage] = useState<string | null>(null);
@@ -256,14 +261,14 @@ export default function Report({
       }
       setSettings(s);
       setAdmin(isAdmin);
-      setGateDone(done || isAdmin);
-      if (isAdmin) setFull(true);
+      setGateDone(done || isAdmin || skipGate);
+      if (isAdmin || initialFull) setFull(true);
       setReady(true);
     })();
     return () => {
       alive = false;
     };
-  }, []);
+  }, [skipGate, initialFull]);
 
   const unlockFull = async () => {
     setPayError(null);
