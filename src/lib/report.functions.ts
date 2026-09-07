@@ -53,8 +53,8 @@ export const getMyReport = createServerFn({ method: "POST" })
       timezone: row.timezone,
       gender: row.gender as BirthInput["gender"],
       place: row.place,
-      lat: row.lat ?? undefined,
-      lon: row.lon ?? undefined,
+      ...(row.lat != null ? { lat: row.lat } : {}),
+      ...(row.lon != null ? { lon: row.lon } : {}),
       mobile: row.mobile,
       email: row.email,
     };
