@@ -56,7 +56,6 @@ export const Route = createFileRoute("/api/public/telegram/$sub")({
           sender_id: sender,
           recipient_id: recipient,
           body,
-          via: "telegram",
           delivered_to_telegram: true,
         });
         if (error) return Response.json({ error: error.message }, { status: 500 });
