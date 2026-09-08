@@ -14,6 +14,7 @@ import { Route as AdminRouteImport } from './routes/admin'
 import { Route as AuthRouteImport } from './routes/auth'
 import { Route as MeRouteImport } from './routes/me'
 import { Route as PayRouteImport } from './routes/pay'
+import { Route as ReportRouteImport } from './routes/report'
 import { Route as SubadminRouteImport } from './routes/subadmin'
 import { Route as SuperadminRouteImport } from './routes/superadmin'
 import { Route as SubadminAuthRouteImport } from './routes/subadmin/auth'
@@ -44,6 +45,11 @@ const MeRoute = MeRouteImport.update({
 const PayRoute = PayRouteImport.update({
   id: '/pay',
   path: '/pay',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ReportRoute = ReportRouteImport.update({
+  id: '/report',
+  path: '/report',
   getParentRoute: () => rootRouteImport,
 } as any)
 const SubadminRoute = SubadminRouteImport.update({
@@ -83,6 +89,7 @@ export interface FileRoutesByFullPath {
   '/auth': typeof AuthRoute
   '/me': typeof MeRoute
   '/pay': typeof PayRoute
+  '/report': typeof ReportRoute
   '/subadmin': typeof SubadminRouteWithChildren
   '/superadmin': typeof SuperadminRouteWithChildren
   '/subadmin/auth': typeof SubadminAuthRoute
@@ -96,6 +103,7 @@ export interface FileRoutesByTo {
   '/auth': typeof AuthRoute
   '/me': typeof MeRoute
   '/pay': typeof PayRoute
+  '/report': typeof ReportRoute
   '/subadmin': typeof SubadminRouteWithChildren
   '/superadmin': typeof SuperadminRouteWithChildren
   '/subadmin/auth': typeof SubadminAuthRoute
@@ -110,6 +118,7 @@ export interface FileRoutesById {
   '/auth': typeof AuthRoute
   '/me': typeof MeRoute
   '/pay': typeof PayRoute
+  '/report': typeof ReportRoute
   '/subadmin': typeof SubadminRouteWithChildren
   '/superadmin': typeof SuperadminRouteWithChildren
   '/subadmin/auth': typeof SubadminAuthRoute
@@ -125,6 +134,7 @@ export interface FileRouteTypes {
     | '/auth'
     | '/me'
     | '/pay'
+    | '/report'
     | '/subadmin'
     | '/superadmin'
     | '/subadmin/auth'
@@ -138,6 +148,7 @@ export interface FileRouteTypes {
     | '/auth'
     | '/me'
     | '/pay'
+    | '/report'
     | '/subadmin'
     | '/superadmin'
     | '/subadmin/auth'
@@ -151,6 +162,7 @@ export interface FileRouteTypes {
     | '/auth'
     | '/me'
     | '/pay'
+    | '/report'
     | '/subadmin'
     | '/superadmin'
     | '/subadmin/auth'
@@ -165,6 +177,7 @@ export interface RootRouteChildren {
   AuthRoute: typeof AuthRoute
   MeRoute: typeof MeRoute
   PayRoute: typeof PayRoute
+  ReportRoute: typeof ReportRoute
   SubadminRoute: typeof SubadminRouteWithChildren
   SuperadminRoute: typeof SuperadminRouteWithChildren
   ApiPublicGeoRoute: typeof ApiPublicGeoRoute
@@ -206,6 +219,13 @@ declare module '@tanstack/react-router' {
       path: '/pay'
       fullPath: '/pay'
       preLoaderRoute: typeof PayRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/report': {
+      id: '/report'
+      path: '/report'
+      fullPath: '/report'
+      preLoaderRoute: typeof ReportRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/subadmin': {
@@ -283,6 +303,7 @@ const rootRouteChildren: RootRouteChildren = {
   AuthRoute: AuthRoute,
   MeRoute: MeRoute,
   PayRoute: PayRoute,
+  ReportRoute: ReportRoute,
   SubadminRoute: SubadminRouteWithChildren,
   SuperadminRoute: SuperadminRouteWithChildren,
   ApiPublicGeoRoute: ApiPublicGeoRoute,

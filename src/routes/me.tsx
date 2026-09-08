@@ -118,7 +118,7 @@ function MePage() {
           sub="Short report social steps ke baad, full report payment ke baad khulti hai."
           actions={
             <div className="flex gap-2">
-              <Link to="/report" className={btnAccent}>
+              <Link to="/report" search={{ id: undefined }} className={btnAccent}>
                 Report kholein
               </Link>
               {!paid && (
