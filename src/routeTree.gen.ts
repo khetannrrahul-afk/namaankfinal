@@ -17,6 +17,7 @@ import { Route as PayRouteImport } from './routes/pay'
 import { Route as ReportRouteImport } from './routes/report'
 import { Route as SubadminRouteImport } from './routes/subadmin'
 import { Route as SuperadminRouteImport } from './routes/superadmin'
+import { Route as SubadminIndexRouteImport } from './routes/subadmin/index'
 import { Route as SubadminAuthRouteImport } from './routes/subadmin/auth'
 import { Route as SuperadminLoginRouteImport } from './routes/superadmin/login'
 import { Route as ApiPublicGeoRouteImport } from './routes/api/public/geo'
@@ -62,6 +63,11 @@ const SuperadminRoute = SuperadminRouteImport.update({
   path: '/superadmin',
   getParentRoute: () => rootRouteImport,
 } as any)
+const SubadminIndexRoute = SubadminIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => SubadminRoute,
+} as any)
 const SubadminAuthRoute = SubadminAuthRouteImport.update({
   id: '/auth',
   path: '/auth',
@@ -94,6 +100,7 @@ export interface FileRoutesByFullPath {
   '/superadmin': typeof SuperadminRouteWithChildren
   '/subadmin/auth': typeof SubadminAuthRoute
   '/superadmin/login': typeof SuperadminLoginRoute
+  '/subadmin/': typeof SubadminIndexRoute
   '/api/public/geo': typeof ApiPublicGeoRoute
   '/api/public/telegram/$sub': typeof ApiPublicTelegramSubRoute
 }
@@ -104,10 +111,10 @@ export interface FileRoutesByTo {
   '/me': typeof MeRoute
   '/pay': typeof PayRoute
   '/report': typeof ReportRoute
-  '/subadmin': typeof SubadminRouteWithChildren
   '/superadmin': typeof SuperadminRouteWithChildren
   '/subadmin/auth': typeof SubadminAuthRoute
   '/superadmin/login': typeof SuperadminLoginRoute
+  '/subadmin': typeof SubadminIndexRoute
   '/api/public/geo': typeof ApiPublicGeoRoute
   '/api/public/telegram/$sub': typeof ApiPublicTelegramSubRoute
 }
@@ -123,6 +130,7 @@ export interface FileRoutesById {
   '/superadmin': typeof SuperadminRouteWithChildren
   '/subadmin/auth': typeof SubadminAuthRoute
   '/superadmin/login': typeof SuperadminLoginRoute
+  '/subadmin/': typeof SubadminIndexRoute
   '/api/public/geo': typeof ApiPublicGeoRoute
   '/api/public/telegram/$sub': typeof ApiPublicTelegramSubRoute
 }
@@ -139,6 +147,7 @@ export interface FileRouteTypes {
     | '/superadmin'
     | '/subadmin/auth'
     | '/superadmin/login'
+    | '/subadmin/'
     | '/api/public/geo'
     | '/api/public/telegram/$sub'
   fileRoutesByTo: FileRoutesByTo
@@ -149,10 +158,10 @@ export interface FileRouteTypes {
     | '/me'
     | '/pay'
     | '/report'
-    | '/subadmin'
     | '/superadmin'
     | '/subadmin/auth'
     | '/superadmin/login'
+    | '/subadmin'
     | '/api/public/geo'
     | '/api/public/telegram/$sub'
   id:
@@ -167,6 +176,7 @@ export interface FileRouteTypes {
     | '/superadmin'
     | '/subadmin/auth'
     | '/superadmin/login'
+    | '/subadmin/'
     | '/api/public/geo'
     | '/api/public/telegram/$sub'
   fileRoutesById: FileRoutesById
@@ -242,6 +252,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof SuperadminRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/subadmin/': {
+      id: '/subadmin/'
+      path: '/'
+      fullPath: '/subadmin/'
+      preLoaderRoute: typeof SubadminIndexRouteImport
+      parentRoute: typeof SubadminRoute
+    }
     '/subadmin/auth': {
       id: '/subadmin/auth'
       path: '/auth'
@@ -275,10 +292,12 @@ declare module '@tanstack/react-router' {
 
 interface SubadminRouteChildren {
   SubadminAuthRoute: typeof SubadminAuthRoute
+  SubadminIndexRoute: typeof SubadminIndexRoute
 }
 
 const SubadminRouteChildren: SubadminRouteChildren = {
   SubadminAuthRoute: SubadminAuthRoute,
+  SubadminIndexRoute: SubadminIndexRoute,
 }
 
 const SubadminRouteWithChildren = SubadminRoute._addFileChildren(
