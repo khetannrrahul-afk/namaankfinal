@@ -51,12 +51,6 @@ function Index() {
   return (
     <main className="min-h-screen">
       <header className="hero-grad relative border-b border-border px-4 py-10 text-center">
-        <Link
-          to="/auth"
-          className="absolute right-4 top-4 rounded-xl border border-primary/50 bg-primary/15 px-3 py-1.5 text-[11px] text-primary"
-        >
-          Mera Account
-        </Link>
         <h1 className="text-4xl font-bold tracking-tight glow-text sm:text-5xl">NAMAANK</h1>
         <p className="mt-2 text-sm tracking-[0.3em] text-accent uppercase">Har Ank ke Rahasye</p>
         <p className="mx-auto mt-3 max-w-md text-xs text-foreground/80">

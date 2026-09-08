@@ -91,7 +91,7 @@ function PayPage() {
           {paid ? (
             <div className="space-y-3">
               <p className="text-sm text-primary">Payment ho chuka hai — full report unlocked ✓</p>
-              <Link to="/report" className={btnPrimary}>
+              <Link to="/report" search={{ id: undefined }} className={btnPrimary}>
                 Full report kholein
               </Link>
             </div>

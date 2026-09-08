@@ -13,7 +13,7 @@ export const btnGhost =
 export const btnAccent =
   "inline-flex items-center justify-center rounded-xl border border-primary/50 bg-primary/15 px-3 py-2 text-xs text-primary transition hover:bg-primary/25";
 
-export function Panel({ title, sub, children, actions }: { title?: string; sub?: string; children: ReactNode; actions?: ReactNode }) {
+export function Panel({ title, sub, children, actions }: { title?: string | undefined; sub?: string | undefined; children: ReactNode; actions?: ReactNode | undefined }) {
   return (
     <section className="surface p-4 sm:p-5">
       {(title || actions) && (
@@ -30,7 +30,7 @@ export function Panel({ title, sub, children, actions }: { title?: string; sub?:
   );
 }
 
-export function PageHeader({ title, sub, right }: { title: string; sub?: string; right?: ReactNode }) {
+export function PageHeader({ title, sub, right }: { title: string; sub?: string | undefined; right?: ReactNode | undefined }) {
   return (
     <div className="flex flex-wrap items-center justify-between gap-3">
       <div>
