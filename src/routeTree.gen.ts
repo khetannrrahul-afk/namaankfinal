@@ -53,24 +53,24 @@ const ReportRoute = ReportRouteImport.update({
   getParentRoute: () => rootRouteImport,
 } as any)
 const SubadminIndexRoute = SubadminIndexRouteImport.update({
-  id: '/',
-  path: '/',
-  getParentRoute: () => SubadminRoute,
+  id: '/subadmin/',
+  path: '/subadmin/',
+  getParentRoute: () => rootRouteImport,
 } as any)
 const SubadminAuthRoute = SubadminAuthRouteImport.update({
-  id: '/auth',
-  path: '/auth',
-  getParentRoute: () => SubadminRoute,
+  id: '/subadmin/auth',
+  path: '/subadmin/auth',
+  getParentRoute: () => rootRouteImport,
 } as any)
 const SuperadminIndexRoute = SuperadminIndexRouteImport.update({
-  id: '/',
-  path: '/',
-  getParentRoute: () => SuperadminRoute,
+  id: '/superadmin/',
+  path: '/superadmin/',
+  getParentRoute: () => rootRouteImport,
 } as any)
 const SuperadminLoginRoute = SuperadminLoginRouteImport.update({
-  id: '/login',
-  path: '/login',
-  getParentRoute: () => SuperadminRoute,
+  id: '/superadmin/login',
+  path: '/superadmin/login',
+  getParentRoute: () => rootRouteImport,
 } as any)
 const ApiPublicGeoRoute = ApiPublicGeoRouteImport.update({
   id: '/api/public/geo',
@@ -178,6 +178,10 @@ export interface RootRouteChildren {
   MeRoute: typeof MeRoute
   PayRoute: typeof PayRoute
   ReportRoute: typeof ReportRoute
+  SubadminAuthRoute: typeof SubadminAuthRoute
+  SuperadminLoginRoute: typeof SuperadminLoginRoute
+  SubadminIndexRoute: typeof SubadminIndexRoute
+  SuperadminIndexRoute: typeof SuperadminIndexRoute
   ApiPublicGeoRoute: typeof ApiPublicGeoRoute
   ApiPublicTelegramSubRoute: typeof ApiPublicTelegramSubRoute
 }
@@ -228,31 +232,31 @@ declare module '@tanstack/react-router' {
     }
     '/subadmin/': {
       id: '/subadmin/'
-      path: '/'
+      path: '/subadmin'
       fullPath: '/subadmin/'
       preLoaderRoute: typeof SubadminIndexRouteImport
-      parentRoute: typeof SubadminRoute
+      parentRoute: typeof rootRouteImport
     }
     '/subadmin/auth': {
       id: '/subadmin/auth'
-      path: '/auth'
+      path: '/subadmin/auth'
       fullPath: '/subadmin/auth'
       preLoaderRoute: typeof SubadminAuthRouteImport
-      parentRoute: typeof SubadminRoute
+      parentRoute: typeof rootRouteImport
     }
     '/superadmin/': {
       id: '/superadmin/'
-      path: '/'
+      path: '/superadmin'
       fullPath: '/superadmin/'
       preLoaderRoute: typeof SuperadminIndexRouteImport
-      parentRoute: typeof SuperadminRoute
+      parentRoute: typeof rootRouteImport
     }
     '/superadmin/login': {
       id: '/superadmin/login'
-      path: '/login'
+      path: '/superadmin/login'
       fullPath: '/superadmin/login'
       preLoaderRoute: typeof SuperadminLoginRouteImport
-      parentRoute: typeof SuperadminRoute
+      parentRoute: typeof rootRouteImport
     }
     '/api/public/geo': {
       id: '/api/public/geo'
@@ -278,6 +282,10 @@ const rootRouteChildren: RootRouteChildren = {
   MeRoute: MeRoute,
   PayRoute: PayRoute,
   ReportRoute: ReportRoute,
+  SubadminAuthRoute: SubadminAuthRoute,
+  SuperadminLoginRoute: SuperadminLoginRoute,
+  SubadminIndexRoute: SubadminIndexRoute,
+  SuperadminIndexRoute: SuperadminIndexRoute,
   ApiPublicGeoRoute: ApiPublicGeoRoute,
   ApiPublicTelegramSubRoute: ApiPublicTelegramSubRoute,
 }
