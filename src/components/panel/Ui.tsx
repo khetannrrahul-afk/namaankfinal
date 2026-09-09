@@ -1,3 +1,4 @@
+import { useState } from "react";
 import type { ReactNode } from "react";
 import { Link } from "@tanstack/react-router";
 
@@ -57,4 +58,44 @@ export function Stat({ label, value, tone = "default" }: { label: string; value:
 
 export function Loading() {
   return <main className="p-10 text-center text-sm text-muted-foreground">Loading…</main>;
+}
+
+export function PasswordInput({
+  value,
+  onChange,
+  placeholder = "Password",
+  required,
+  minLength,
+  autoComplete,
+}: {
+  value: string;
+  onChange: (v: string) => void;
+  placeholder?: string | undefined;
+  required?: boolean | undefined;
+  minLength?: number | undefined;
+  autoComplete?: string | undefined;
+}) {
+  const [show, setShow] = useState(false);
+  return (
+    <div className="relative">
+      <input
+        className={`${field} pr-16`}
+        type={show ? "text" : "password"}
+        placeholder={placeholder}
+        value={value}
+        onChange={(e) => onChange(e.target.value)}
+        {...(required ? { required: true } : {})}
+        {...(minLength ? { minLength } : {})}
+        {...(autoComplete ? { autoComplete } : {})}
+      />
+      <button
+        type="button"
+        onClick={() => setShow((s) => !s)}
+        aria-label={show ? "Password chhupayein" : "Password dekhein"}
+        className="absolute right-2 top-1/2 -translate-y-1/2 rounded-lg px-2 py-1 text-[11px] text-muted-foreground transition hover:text-primary"
+      >
+        {show ? "Hide" : "View"}
+      </button>
+    </div>
+  );
 }
