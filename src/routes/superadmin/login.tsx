@@ -2,7 +2,7 @@ import { createFileRoute, useNavigate, Link } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { getAccount } from "@/lib/account";
-import { field, btnPrimary } from "@/components/panel/Ui";
+import { field, btnPrimary, PasswordInput } from "@/components/panel/Ui";
 
 export const Route = createFileRoute("/superadmin/login")({
   ssr: false,
@@ -23,13 +23,20 @@ function SuperLogin() {
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [fullName, setFullName] = useState("");
   const [msg, setMsg] = useState("");
   const [busy, setBusy] = useState(false);
+  const [setup, setSetup] = useState<boolean | null>(null);
 
   useEffect(() => {
     void (async () => {
       const a = await getAccount();
-      if (a?.isSuper) navigate({ to: "/superadmin" });
+      if (a?.isSuper) {
+        navigate({ to: "/superadmin" });
+        return;
+      }
+      const { data } = await supabase.rpc("has_any_account");
+      setSetup(data === false);
     })();
   }, [navigate]);
 
@@ -37,9 +44,41 @@ function SuperLogin() {
     e.preventDefault();
     setBusy(true);
     setMsg("");
+
+    if (setup) {
+      const { error } = await supabase.auth.signUp({
+        email,
+        password,
+        options: {
+          emailRedirectTo: `${window.location.origin}/superadmin`,
+          data: { account_type: "super_admin", full_name: fullName.trim() },
+        },
+      });
+      if (error) {
+        setMsg(error.message);
+        setBusy(false);
+        return;
+      }
+      const { error: signInError } = await supabase.auth.signInWithPassword({ email, password });
+      if (signInError) {
+        setMsg("Account ban gaya. Ab email-password se sign in karein.");
+        setSetup(false);
+        setBusy(false);
+        return;
+      }
+      const created = await getAccount();
+      if (created?.isSuper) {
+        navigate({ to: "/superadmin" });
+      } else {
+        setMsg("Account ban gaya, lekin superadmin role nahi mila. Support se sampark karein.");
+      }
+      setBusy(false);
+      return;
+    }
+
     const { error } = await supabase.auth.signInWithPassword({ email, password });
     if (error) {
-      setMsg(error.message);
+      setMsg(error.message === "Invalid login credentials" ? "Email ya password galat hai." : error.message);
       setBusy(false);
       return;
     }
@@ -57,20 +96,20 @@ function SuperLogin() {
     <main className="flex min-h-screen items-center justify-center px-4">
       <form onSubmit={submit} className="surface w-full max-w-sm p-6">
         <h1 className="mb-1 text-xl font-semibold glow-text">Superadmin</h1>
-        <p className="mb-5 text-xs text-muted-foreground">Poore NAMAANK system ka control panel.</p>
+        <p className="mb-5 text-xs text-muted-foreground">
+          {setup
+            ? "Abhi tak koi account nahi bana. Pehla account banayein — wahi superadmin hoga."
+            : "Poore NAMAANK system ka control panel."}
+        </p>
         <div className="space-y-3">
+          {setup && (
+            <input className={field} placeholder="Aapka naam*" value={fullName} onChange={(e) => setFullName(e.target.value)} required />
+          )}
           <input className={field} type="email" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} required />
-          <input
-            className={field}
-            type="password"
-            placeholder="Password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required
-          />
+          <PasswordInput placeholder="Password" value={password} onChange={setPassword} required minLength={6} />
           {msg && <p className="text-xs text-destructive">{msg}</p>}
           <button type="submit" disabled={busy} className={`${btnPrimary} w-full py-3`}>
-            {busy ? "Ruko…" : "Sign In"}
+            {busy ? "Ruko…" : setup ? "Superadmin account banayein" : "Sign In"}
           </button>
           <p className="pt-1 text-center text-[11px] text-muted-foreground">
             <Link to="/auth" className="text-primary underline">

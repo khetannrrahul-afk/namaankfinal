@@ -2,7 +2,7 @@ import { createFileRoute, useNavigate, Link } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { getAccount, homeFor } from "@/lib/account";
-import { field, btnPrimary } from "@/components/panel/Ui";
+import { field, btnPrimary, PasswordInput } from "@/components/panel/Ui";
 
 export const Route = createFileRoute("/subadmin/auth")({
   ssr: false,
@@ -161,15 +161,7 @@ function SubAdminAuth() {
           )}
 
           <input className={field} type="email" placeholder="Email*" value={f.email} onChange={(e) => set("email", e.target.value)} required />
-          <input
-            className={field}
-            type="password"
-            placeholder="Password*"
-            value={f.password}
-            onChange={(e) => set("password", e.target.value)}
-            required
-            minLength={6}
-          />
+          <PasswordInput placeholder="Password*" value={f.password} onChange={(v) => set("password", v)} required minLength={6} />
 
           {msg && <p className={`text-xs ${msg.kind === "error" ? "text-destructive" : "text-primary"}`}>{msg.text}</p>}
 
