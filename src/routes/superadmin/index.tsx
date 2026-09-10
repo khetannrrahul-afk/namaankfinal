@@ -273,7 +273,7 @@ function SuperAdminPanel() {
           >
             <div className="grid gap-3 sm:grid-cols-2">
               <input className={field} placeholder="Bot username (bina @)" value={botForm.bot_username} onChange={(e) => setBotForm({ ...botForm, bot_username: e.target.value })} />
-              <input className={field} type="password" placeholder="Bot token (khali chhodein to purana rahega)" value={botForm.bot_token} onChange={(e) => setBotForm({ ...botForm, bot_token: e.target.value })} />
+              <PasswordInput placeholder="Bot token (khali chhodein to purana rahega)" value={botForm.bot_token} onChange={(v) => setBotForm({ ...botForm, bot_token: v })} />
               <input className={field} placeholder="Subadmin chat id" value={botForm.sub_admin_chat_id} onChange={(e) => setBotForm({ ...botForm, sub_admin_chat_id: e.target.value })} />
               <input className={field} placeholder="Superadmin chat id" value={botForm.super_admin_chat_id} onChange={(e) => setBotForm({ ...botForm, super_admin_chat_id: e.target.value })} />
             </div>
