@@ -2,7 +2,7 @@ import { createFileRoute, useNavigate, Link } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { getAccount, homeFor } from "@/lib/account";
-import { field, btnPrimary } from "@/components/panel/Ui";
+import { field, btnPrimary, PasswordInput } from "@/components/panel/Ui";
 
 export const Route = createFileRoute("/auth")({
   ssr: false,
@@ -142,12 +142,10 @@ function AuthPage() {
           )}
 
           <input className={field} type="email" placeholder="Email*" value={form.email} onChange={(e) => set("email", e.target.value)} required />
-          <input
-            className={field}
-            type="password"
+          <PasswordInput
             placeholder="Password* (kam se kam 6 akshar)"
             value={form.password}
-            onChange={(e) => set("password", e.target.value)}
+            onChange={(v) => set("password", v)}
             required
             minLength={6}
           />

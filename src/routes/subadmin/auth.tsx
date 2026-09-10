@@ -161,15 +161,7 @@ function SubAdminAuth() {
           )}
 
           <input className={field} type="email" placeholder="Email*" value={f.email} onChange={(e) => set("email", e.target.value)} required />
-          <input
-            className={field}
-            type="password"
-            placeholder="Password*"
-            value={f.password}
-            onChange={(e) => set("password", e.target.value)}
-            required
-            minLength={6}
-          />
+          <PasswordInput placeholder="Password*" value={f.password} onChange={(v) => set("password", v)} required minLength={6} />
 
           {msg && <p className={`text-xs ${msg.kind === "error" ? "text-destructive" : "text-primary"}`}>{msg.text}</p>}
 
