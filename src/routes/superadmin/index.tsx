@@ -2,7 +2,7 @@ import { createFileRoute, useNavigate, Link } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { getAccount, type Account } from "@/lib/account";
-import { PageHeader, Panel, Stat, Loading, field, btnGhost, btnAccent, btnPrimary } from "@/components/panel/Ui";
+import { PageHeader, Panel, Stat, Loading, field, btnGhost, btnAccent, btnPrimary, PasswordInput } from "@/components/panel/Ui";
 
 export const Route = createFileRoute("/superadmin/")({
   ssr: false,

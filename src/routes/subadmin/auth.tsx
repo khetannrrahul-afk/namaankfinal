@@ -2,7 +2,7 @@ import { createFileRoute, useNavigate, Link } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { getAccount, homeFor } from "@/lib/account";
-import { field, btnPrimary } from "@/components/panel/Ui";
+import { field, btnPrimary, PasswordInput } from "@/components/panel/Ui";
 
 export const Route = createFileRoute("/subadmin/auth")({
   ssr: false,
