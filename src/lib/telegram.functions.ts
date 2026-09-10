@@ -77,8 +77,13 @@ export const registerBotWebhook = createServerFn({ method: "POST" })
     return d;
   })
   .handler(async ({ data, context }) => {
-    const { data: isSuper } = await context.supabase.rpc("is_super_admin");
-    if (!isSuper) throw new Error("Forbidden");
+    const { data: roles } = await context.supabase
+      .from("user_roles")
+      .select("role")
+      .eq("user_id", context.userId)
+      .in("role", ["super_admin", "admin"]);
+    if (!roles || roles.length === 0) throw new Error("Forbidden");
+
 
     const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
     const { createHash } = await import("crypto");
