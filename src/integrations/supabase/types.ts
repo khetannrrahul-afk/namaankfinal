@@ -458,16 +458,6 @@ export type Database = {
     }
     Functions: {
       has_any_account: { Args: never; Returns: boolean }
-      has_role: {
-        Args: {
-          _role: Database["public"]["Enums"]["app_role"]
-          _user_id: string
-        }
-        Returns: boolean
-      }
-      is_sub_admin: { Args: never; Returns: boolean }
-      is_super_admin: { Args: never; Returns: boolean }
-      my_sub_admin: { Args: never; Returns: string }
       username_available: { Args: { _username: string }; Returns: boolean }
       validate_referral_code: {
         Args: { _code: string }
