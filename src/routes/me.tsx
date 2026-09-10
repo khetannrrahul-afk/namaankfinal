@@ -7,6 +7,7 @@ import { Chat } from "@/components/panel/Chat";
 import { PageHeader, Panel, Stat, Loading, btnGhost, btnAccent } from "@/components/panel/Ui";
 
 export const Route = createFileRoute("/me")({
+  staticData: { sitemap: false },
   ssr: false,
   head: () => ({
     meta: [

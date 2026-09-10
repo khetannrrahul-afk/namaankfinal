@@ -5,6 +5,7 @@ import { getAccount, homeFor } from "@/lib/account";
 import { field, btnPrimary, PasswordInput } from "@/components/panel/Ui";
 
 export const Route = createFileRoute("/subadmin/auth")({
+  staticData: { sitemap: true },
   ssr: false,
   head: () => ({
     meta: [

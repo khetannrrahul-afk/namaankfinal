@@ -11,6 +11,7 @@ function safeEqual(a: string, b: string) {
 }
 
 export const Route = createFileRoute("/api/public/telegram/$sub")({
+  staticData: { sitemap: false },
   server: {
     handlers: {
       POST: async ({ request, params }) => {

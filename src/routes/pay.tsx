@@ -6,6 +6,7 @@ import { payForFullReportAsUser } from "@/lib/checkout";
 import { PageHeader, Panel, Loading, btnPrimary, btnGhost } from "@/components/panel/Ui";
 
 export const Route = createFileRoute("/pay")({
+  staticData: { sitemap: false },
   ssr: false,
   head: () => ({
     meta: [
