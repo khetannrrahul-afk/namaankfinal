@@ -8,6 +8,7 @@ import type { Lang } from "@/lib/langs/types";
 
 
 export const Route = createFileRoute("/")({
+  staticData: { sitemap: true },
   head: () => ({
     meta: [
       { title: "NAMAANK — Har Ank ke Rahasye | Numerology Report" },

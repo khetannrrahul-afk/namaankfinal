@@ -16,8 +16,8 @@ function NotFoundComponent() {
   return (
     <div className="flex min-h-screen items-center justify-center bg-background px-4">
       <div className="max-w-md text-center">
-        <h1 className="text-7xl font-bold text-foreground">404</h1>
-        <h2 className="mt-4 text-xl font-semibold text-foreground">Page not found</h2>
+        <p className="text-7xl font-bold text-foreground">404</p>
+        <h1 className="mt-4 text-xl font-semibold text-foreground">Page Not Found</h1>
         <p className="mt-2 text-sm text-muted-foreground">
           The page you're looking for doesn't exist or has been moved.
         </p>
@@ -73,17 +73,15 @@ function ErrorComponent({ error, reset }: { error: Error; reset: () => void }) {
 }
 
 export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()({
+  staticData: { sitemap: false },
   head: () => ({
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "NAMAANK — Har Ank ke Rahasye" },
-      { name: "description", content: "Chaldean aur Lo Shu numerology par aadharit Hinglish report." },
       { name: "author", content: "NAMAANK" },
       { name: "application-name", content: "NAMAANK" },
       { name: "apple-mobile-web-app-title", content: "NAMAANK" },
-      { property: "og:title", content: "NAMAANK — Har Ank ke Rahasye" },
-      { property: "og:description", content: "Numerology report — driver, conductor, kua aur full life report." },
+      { property: "og:site_name", content: "NAMAANK" },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
       { name: "twitter:site", content: "@Lovable" },

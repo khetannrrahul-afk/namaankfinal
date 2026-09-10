@@ -5,6 +5,7 @@ import { getAccount } from "@/lib/account";
 import { field, btnPrimary, PasswordInput } from "@/components/panel/Ui";
 
 export const Route = createFileRoute("/superadmin/login")({
+  staticData: { sitemap: false },
   ssr: false,
   head: () => ({
     meta: [

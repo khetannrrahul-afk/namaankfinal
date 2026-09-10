@@ -9,6 +9,7 @@ import Report from "@/components/namaank/Report";
 import { PageHeader, Panel, Loading, btnAccent, btnGhost, btnPrimary } from "@/components/panel/Ui";
 
 export const Route = createFileRoute("/report")({
+  staticData: { sitemap: false },
   ssr: false,
   validateSearch: (s: Record<string, unknown>) => ({ id: typeof s['id'] === "string" ? (s['id'] as string) : undefined }),
   head: () => ({

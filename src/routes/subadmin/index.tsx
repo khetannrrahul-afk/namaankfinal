@@ -6,6 +6,7 @@ import { Chat } from "@/components/panel/Chat";
 import { PageHeader, Panel, Stat, Loading, field, btnGhost, btnAccent, btnPrimary } from "@/components/panel/Ui";
 
 export const Route = createFileRoute("/subadmin/")({
+  staticData: { sitemap: false },
   ssr: false,
   head: () => ({
     meta: [
