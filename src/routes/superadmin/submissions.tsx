@@ -2,7 +2,7 @@ import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { useCallback, useEffect, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
 
-export const Route = createFileRoute("/admin")({
+export const Route = createFileRoute("/superadmin/submissions")({
   staticData: { sitemap: false },
   ssr: false,
   head: () => ({
