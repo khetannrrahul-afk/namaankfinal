@@ -11,20 +11,22 @@ export const Route = createFileRoute("/")({
   staticData: { sitemap: true },
   head: () => ({
     meta: [
-      { title: "NAMAANK — Har Ank ke Rahasye | Numerology Report" },
+      { title: "Free Numerology Report in Hindi — NAMAANK" },
       {
         name: "description",
         content:
-          "NAMAANK: Chaldean aur Lo Shu numerology se driver, conductor, kua, birth chart, lucky numbers aur 23-page full life report — Hinglish mein.",
+          "Free numerology report in Hindi/Hinglish: Chaldean aur Lo Shu se driver, conductor, kua, birth chart, lucky numbers aur 23-page full life report.",
       },
-      { property: "og:title", content: "NAMAANK — Har Ank ke Rahasye" },
+      { property: "og:title", content: "Free Numerology Report in Hindi — NAMAANK" },
       {
         property: "og:description",
         content: "Janm tarikh, samay aur sthaan se banaya gaya vistrit numerology report — 23 pages full life report ke saath.",
       },
+      { property: "og:url", content: "https://namaank2.lovable.app/" },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
+    links: [{ rel: "canonical", href: "https://namaank2.lovable.app/" }],
   }),
   component: Index,
 });
@@ -52,10 +54,12 @@ function Index() {
   return (
     <main className="min-h-screen">
       <header className="hero-grad relative border-b border-border px-4 py-10 text-center">
-        <h1 className="text-4xl font-bold tracking-tight glow-text sm:text-5xl">NAMAANK</h1>
+        <h1 className="text-4xl font-bold tracking-tight glow-text sm:text-5xl">
+          NAMAANK — Free Numerology Report in Hindi
+        </h1>
         <p className="mt-2 text-sm tracking-[0.3em] text-accent uppercase">Har Ank ke Rahasye</p>
         <p className="mx-auto mt-3 max-w-md text-xs text-foreground/80">
-          Chaldean + Indian (Lo Shu) numerology · janm tarikh, samay aur sthaan par aadharit
+          Chaldean + Indian (Lo Shu) numerology calculator in Hindi · janm tarikh, samay aur sthaan par aadharit
         </p>
       </header>
 
