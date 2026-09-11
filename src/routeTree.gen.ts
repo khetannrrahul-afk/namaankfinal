@@ -10,7 +10,6 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
-import { Route as AdminRouteImport } from './routes/admin'
 import { Route as AuthRouteImport } from './routes/auth'
 import { Route as MeRouteImport } from './routes/me'
 import { Route as PayRouteImport } from './routes/pay'
@@ -20,17 +19,13 @@ import { Route as SubadminIndexRouteImport } from './routes/subadmin/index'
 import { Route as SubadminAuthRouteImport } from './routes/subadmin/auth'
 import { Route as SuperadminIndexRouteImport } from './routes/superadmin/index'
 import { Route as SuperadminLoginRouteImport } from './routes/superadmin/login'
+import { Route as SuperadminSubmissionsRouteImport } from './routes/superadmin/submissions'
 import { Route as ApiPublicGeoRouteImport } from './routes/api/public/geo'
 import { Route as ApiPublicTelegramSubRouteImport } from './routes/api/public/telegram/$sub'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const AdminRoute = AdminRouteImport.update({
-  id: '/admin',
-  path: '/admin',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AuthRoute = AuthRouteImport.update({
@@ -78,6 +73,11 @@ const SuperadminLoginRoute = SuperadminLoginRouteImport.update({
   path: '/superadmin/login',
   getParentRoute: () => rootRouteImport,
 } as any)
+const SuperadminSubmissionsRoute = SuperadminSubmissionsRouteImport.update({
+  id: '/superadmin/submissions',
+  path: '/superadmin/submissions',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ApiPublicGeoRoute = ApiPublicGeoRouteImport.update({
   id: '/api/public/geo',
   path: '/api/public/geo',
@@ -91,7 +91,6 @@ const ApiPublicTelegramSubRoute = ApiPublicTelegramSubRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
-  '/admin': typeof AdminRoute
   '/auth': typeof AuthRoute
   '/me': typeof MeRoute
   '/pay': typeof PayRoute
@@ -99,6 +98,7 @@ export interface FileRoutesByFullPath {
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/subadmin/auth': typeof SubadminAuthRoute
   '/superadmin/login': typeof SuperadminLoginRoute
+  '/superadmin/submissions': typeof SuperadminSubmissionsRoute
   '/subadmin/': typeof SubadminIndexRoute
   '/superadmin/': typeof SuperadminIndexRoute
   '/api/public/geo': typeof ApiPublicGeoRoute
@@ -106,7 +106,6 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
-  '/admin': typeof AdminRoute
   '/auth': typeof AuthRoute
   '/me': typeof MeRoute
   '/pay': typeof PayRoute
@@ -114,6 +113,7 @@ export interface FileRoutesByTo {
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/subadmin/auth': typeof SubadminAuthRoute
   '/superadmin/login': typeof SuperadminLoginRoute
+  '/superadmin/submissions': typeof SuperadminSubmissionsRoute
   '/subadmin': typeof SubadminIndexRoute
   '/superadmin': typeof SuperadminIndexRoute
   '/api/public/geo': typeof ApiPublicGeoRoute
@@ -122,7 +122,6 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
-  '/admin': typeof AdminRoute
   '/auth': typeof AuthRoute
   '/me': typeof MeRoute
   '/pay': typeof PayRoute
@@ -130,6 +129,7 @@ export interface FileRoutesById {
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/subadmin/auth': typeof SubadminAuthRoute
   '/superadmin/login': typeof SuperadminLoginRoute
+  '/superadmin/submissions': typeof SuperadminSubmissionsRoute
   '/subadmin/': typeof SubadminIndexRoute
   '/superadmin/': typeof SuperadminIndexRoute
   '/api/public/geo': typeof ApiPublicGeoRoute
@@ -139,7 +139,6 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
-    | '/admin'
     | '/auth'
     | '/me'
     | '/pay'
@@ -147,6 +146,7 @@ export interface FileRouteTypes {
     | '/sitemap.xml'
     | '/subadmin/auth'
     | '/superadmin/login'
+    | '/superadmin/submissions'
     | '/subadmin/'
     | '/superadmin/'
     | '/api/public/geo'
@@ -154,7 +154,6 @@ export interface FileRouteTypes {
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
-    | '/admin'
     | '/auth'
     | '/me'
     | '/pay'
@@ -162,6 +161,7 @@ export interface FileRouteTypes {
     | '/sitemap.xml'
     | '/subadmin/auth'
     | '/superadmin/login'
+    | '/superadmin/submissions'
     | '/subadmin'
     | '/superadmin'
     | '/api/public/geo'
@@ -169,7 +169,6 @@ export interface FileRouteTypes {
   id:
     | '__root__'
     | '/'
-    | '/admin'
     | '/auth'
     | '/me'
     | '/pay'
@@ -177,6 +176,7 @@ export interface FileRouteTypes {
     | '/sitemap.xml'
     | '/subadmin/auth'
     | '/superadmin/login'
+    | '/superadmin/submissions'
     | '/subadmin/'
     | '/superadmin/'
     | '/api/public/geo'
@@ -185,7 +185,6 @@ export interface FileRouteTypes {
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
-  AdminRoute: typeof AdminRoute
   AuthRoute: typeof AuthRoute
   MeRoute: typeof MeRoute
   PayRoute: typeof PayRoute
@@ -193,6 +192,7 @@ export interface RootRouteChildren {
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
   SubadminAuthRoute: typeof SubadminAuthRoute
   SuperadminLoginRoute: typeof SuperadminLoginRoute
+  SuperadminSubmissionsRoute: typeof SuperadminSubmissionsRoute
   SubadminIndexRoute: typeof SubadminIndexRoute
   SuperadminIndexRoute: typeof SuperadminIndexRoute
   ApiPublicGeoRoute: typeof ApiPublicGeoRoute
@@ -206,13 +206,6 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/admin': {
-      id: '/admin'
-      path: '/admin'
-      fullPath: '/admin'
-      preLoaderRoute: typeof AdminRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/auth': {
@@ -278,6 +271,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof SuperadminLoginRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/superadmin/submissions': {
+      id: '/superadmin/submissions'
+      path: '/superadmin/submissions'
+      fullPath: '/superadmin/submissions'
+      preLoaderRoute: typeof SuperadminSubmissionsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/api/public/geo': {
       id: '/api/public/geo'
       path: '/api/public/geo'
@@ -297,7 +297,6 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
-  AdminRoute: AdminRoute,
   AuthRoute: AuthRoute,
   MeRoute: MeRoute,
   PayRoute: PayRoute,
@@ -305,6 +304,7 @@ const rootRouteChildren: RootRouteChildren = {
   SitemapDotxmlRoute: SitemapDotxmlRoute,
   SubadminAuthRoute: SubadminAuthRoute,
   SuperadminLoginRoute: SuperadminLoginRoute,
+  SuperadminSubmissionsRoute: SuperadminSubmissionsRoute,
   SubadminIndexRoute: SubadminIndexRoute,
   SuperadminIndexRoute: SuperadminIndexRoute,
   ApiPublicGeoRoute: ApiPublicGeoRoute,
