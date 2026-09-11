@@ -19,6 +19,7 @@ export const Route = createFileRoute("/auth")({
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
+    links: [{ rel: "canonical", href: "https://namaank2.lovable.app/auth" }],
   }),
   component: AuthPage,
 });
@@ -126,7 +127,7 @@ function AuthPage() {
   return (
     <main className="flex min-h-screen items-center justify-center px-4 py-10">
       <form onSubmit={submit} className="surface w-full max-w-md p-6">
-        <h1 className="mb-1 text-xl font-semibold glow-text">NAMAANK</h1>
+        <h1 className="mb-1 text-xl font-semibold glow-text">NAMAANK — Account Sign In</h1>
         <p className="mb-5 text-xs text-muted-foreground">
           {mode === "in" ? "Apne account mein sign in karein." : "Naya account banayein — guide ka referral code zaroori hai."}
         </p>

@@ -19,6 +19,7 @@ export const Route = createFileRoute("/subadmin/auth")({
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
+    links: [{ rel: "canonical", href: "https://namaank2.lovable.app/subadmin/auth" }],
   }),
   component: SubAdminAuth,
 });
