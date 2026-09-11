@@ -14,6 +14,53 @@ export type Database = {
   }
   public: {
     Tables: {
+      admins: {
+        Row: {
+          company_name: string
+          created_at: string
+          email: string
+          id: string
+          is_active: boolean
+          is_approved: boolean
+          mobile: string
+          updated_at: string
+          username: string
+          whatsapp: string
+        }
+        Insert: {
+          company_name?: string
+          created_at?: string
+          email?: string
+          id: string
+          is_active?: boolean
+          is_approved?: boolean
+          mobile?: string
+          updated_at?: string
+          username: string
+          whatsapp?: string
+        }
+        Update: {
+          company_name?: string
+          created_at?: string
+          email?: string
+          id?: string
+          is_active?: boolean
+          is_approved?: boolean
+          mobile?: string
+          updated_at?: string
+          username?: string
+          whatsapp?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "admins_id_fkey"
+            columns: ["id"]
+            isOneToOne: true
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       app_settings: {
         Row: {
           is_public: boolean
@@ -368,6 +415,7 @@ export type Database = {
       }
       sub_admins: {
         Row: {
+          admin_id: string | null
           created_at: string
           email: string
           facebook_url: string
@@ -384,8 +432,10 @@ export type Database = {
           service_type: string
           telegram_bot_link: string
           username: string
+          whatsapp: string
         }
         Insert: {
+          admin_id?: string | null
           created_at?: string
           email?: string
           facebook_url?: string
@@ -402,8 +452,10 @@ export type Database = {
           service_type?: string
           telegram_bot_link?: string
           username: string
+          whatsapp?: string
         }
         Update: {
+          admin_id?: string | null
           created_at?: string
           email?: string
           facebook_url?: string
@@ -420,8 +472,16 @@ export type Database = {
           service_type?: string
           telegram_bot_link?: string
           username?: string
+          whatsapp?: string
         }
         Relationships: [
+          {
+            foreignKeyName: "sub_admins_admin_id_fkey"
+            columns: ["admin_id"]
+            isOneToOne: false
+            referencedRelation: "admins"
+            referencedColumns: ["id"]
+          },
           {
             foreignKeyName: "sub_admins_id_fkey"
             columns: ["id"]
@@ -452,6 +512,30 @@ export type Database = {
         }
         Relationships: []
       }
+      whatsapp_configs: {
+        Row: {
+          access_token: string
+          id: string
+          is_enabled: boolean
+          phone_number_id: string
+          updated_at: string
+        }
+        Insert: {
+          access_token?: string
+          id?: string
+          is_enabled?: boolean
+          phone_number_id?: string
+          updated_at?: string
+        }
+        Update: {
+          access_token?: string
+          id?: string
+          is_enabled?: boolean
+          phone_number_id?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
@@ -459,6 +543,13 @@ export type Database = {
     Functions: {
       has_any_account: { Args: never; Returns: boolean }
       username_available: { Args: { _username: string }; Returns: boolean }
+      validate_admin_code: {
+        Args: { _code: string }
+        Returns: {
+          admin_id: string
+          company_name: string
+        }[]
+      }
       validate_referral_code: {
         Args: { _code: string }
         Returns: {
