@@ -15,6 +15,7 @@ import { Route as MeRouteImport } from './routes/me'
 import { Route as PayRouteImport } from './routes/pay'
 import { Route as ReportRouteImport } from './routes/report'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
+import { Route as AdminAuthRouteImport } from './routes/admin/auth'
 import { Route as SubadminIndexRouteImport } from './routes/subadmin/index'
 import { Route as SubadminAuthRouteImport } from './routes/subadmin/auth'
 import { Route as SuperadminIndexRouteImport } from './routes/superadmin/index'
@@ -51,6 +52,11 @@ const ReportRoute = ReportRouteImport.update({
 const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
   id: '/sitemap.xml',
   path: '/sitemap.xml',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminAuthRoute = AdminAuthRouteImport.update({
+  id: '/admin/auth',
+  path: '/admin/auth',
   getParentRoute: () => rootRouteImport,
 } as any)
 const SubadminIndexRoute = SubadminIndexRouteImport.update({
@@ -96,6 +102,7 @@ export interface FileRoutesByFullPath {
   '/pay': typeof PayRoute
   '/report': typeof ReportRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/admin/auth': typeof AdminAuthRoute
   '/subadmin/auth': typeof SubadminAuthRoute
   '/superadmin/login': typeof SuperadminLoginRoute
   '/superadmin/submissions': typeof SuperadminSubmissionsRoute
@@ -111,6 +118,7 @@ export interface FileRoutesByTo {
   '/pay': typeof PayRoute
   '/report': typeof ReportRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/admin/auth': typeof AdminAuthRoute
   '/subadmin/auth': typeof SubadminAuthRoute
   '/superadmin/login': typeof SuperadminLoginRoute
   '/superadmin/submissions': typeof SuperadminSubmissionsRoute
@@ -127,6 +135,7 @@ export interface FileRoutesById {
   '/pay': typeof PayRoute
   '/report': typeof ReportRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/admin/auth': typeof AdminAuthRoute
   '/subadmin/auth': typeof SubadminAuthRoute
   '/superadmin/login': typeof SuperadminLoginRoute
   '/superadmin/submissions': typeof SuperadminSubmissionsRoute
@@ -144,6 +153,7 @@ export interface FileRouteTypes {
     | '/pay'
     | '/report'
     | '/sitemap.xml'
+    | '/admin/auth'
     | '/subadmin/auth'
     | '/superadmin/login'
     | '/superadmin/submissions'
@@ -159,6 +169,7 @@ export interface FileRouteTypes {
     | '/pay'
     | '/report'
     | '/sitemap.xml'
+    | '/admin/auth'
     | '/subadmin/auth'
     | '/superadmin/login'
     | '/superadmin/submissions'
@@ -174,6 +185,7 @@ export interface FileRouteTypes {
     | '/pay'
     | '/report'
     | '/sitemap.xml'
+    | '/admin/auth'
     | '/subadmin/auth'
     | '/superadmin/login'
     | '/superadmin/submissions'
@@ -190,6 +202,7 @@ export interface RootRouteChildren {
   PayRoute: typeof PayRoute
   ReportRoute: typeof ReportRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
+  AdminAuthRoute: typeof AdminAuthRoute
   SubadminAuthRoute: typeof SubadminAuthRoute
   SuperadminLoginRoute: typeof SuperadminLoginRoute
   SuperadminSubmissionsRoute: typeof SuperadminSubmissionsRoute
@@ -241,6 +254,13 @@ declare module '@tanstack/react-router' {
       path: '/sitemap.xml'
       fullPath: '/sitemap.xml'
       preLoaderRoute: typeof SitemapDotxmlRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin/auth': {
+      id: '/admin/auth'
+      path: '/admin/auth'
+      fullPath: '/admin/auth'
+      preLoaderRoute: typeof AdminAuthRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/subadmin/': {
@@ -302,6 +322,7 @@ const rootRouteChildren: RootRouteChildren = {
   PayRoute: PayRoute,
   ReportRoute: ReportRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
+  AdminAuthRoute: AdminAuthRoute,
   SubadminAuthRoute: SubadminAuthRoute,
   SuperadminLoginRoute: SuperadminLoginRoute,
   SuperadminSubmissionsRoute: SuperadminSubmissionsRoute,
