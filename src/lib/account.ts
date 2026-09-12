@@ -53,8 +53,10 @@ export interface Account {
   referralCode: string | null;
   referredBy: string | null;
   isSuper: boolean;
+  isAdmin: boolean;
   isSub: boolean;
   subAdmin: SubAdminInfo | null;
+  admin: AdminInfo | null;
   access: ReportAccess;
 }
 
@@ -85,6 +87,12 @@ export async function getAccount(): Promise<Account | null> {
     subAdmin = (data as SubAdminInfo | null) ?? null;
   }
 
+  let admin: AdminInfo | null = null;
+  if (roles.includes("admin")) {
+    const { data } = await supabase.from("admins").select("*").eq("id", user.id).maybeSingle();
+    admin = (data as AdminInfo | null) ?? null;
+  }
+
   return {
     userId: user.id,
     email: profile?.email || user.email || "",
@@ -95,9 +103,11 @@ export async function getAccount(): Promise<Account | null> {
     roles,
     referralCode: profile?.referral_code ?? null,
     referredBy: profile?.referred_by ?? null,
-    isSuper: roles.includes("super_admin") || roles.includes("admin"),
+    isSuper: roles.includes("super_admin"),
+    isAdmin: roles.includes("admin"),
     isSub: roles.includes("sub_admin"),
     subAdmin,
+    admin,
     access: (access as ReportAccess | null) ?? EMPTY_ACCESS,
   };
 }
@@ -105,6 +115,7 @@ export async function getAccount(): Promise<Account | null> {
 /** Role ke hisaab se landing panel. */
 export function homeFor(a: Account): string {
   if (a.isSuper) return "/superadmin";
+  if (a.isAdmin) return "/admin";
   if (a.isSub) return "/subadmin";
   return "/me";
 }
