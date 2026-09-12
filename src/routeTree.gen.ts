@@ -15,6 +15,7 @@ import { Route as MeRouteImport } from './routes/me'
 import { Route as PayRouteImport } from './routes/pay'
 import { Route as ReportRouteImport } from './routes/report'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
+import { Route as AdminIndexRouteImport } from './routes/admin/index'
 import { Route as AdminAuthRouteImport } from './routes/admin/auth'
 import { Route as SubadminIndexRouteImport } from './routes/subadmin/index'
 import { Route as SubadminAuthRouteImport } from './routes/subadmin/auth'
@@ -52,6 +53,11 @@ const ReportRoute = ReportRouteImport.update({
 const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
   id: '/sitemap.xml',
   path: '/sitemap.xml',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminIndexRoute = AdminIndexRouteImport.update({
+  id: '/admin/',
+  path: '/admin/',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AdminAuthRoute = AdminAuthRouteImport.update({
@@ -106,6 +112,7 @@ export interface FileRoutesByFullPath {
   '/subadmin/auth': typeof SubadminAuthRoute
   '/superadmin/login': typeof SuperadminLoginRoute
   '/superadmin/submissions': typeof SuperadminSubmissionsRoute
+  '/admin/': typeof AdminIndexRoute
   '/subadmin/': typeof SubadminIndexRoute
   '/superadmin/': typeof SuperadminIndexRoute
   '/api/public/geo': typeof ApiPublicGeoRoute
@@ -122,6 +129,7 @@ export interface FileRoutesByTo {
   '/subadmin/auth': typeof SubadminAuthRoute
   '/superadmin/login': typeof SuperadminLoginRoute
   '/superadmin/submissions': typeof SuperadminSubmissionsRoute
+  '/admin': typeof AdminIndexRoute
   '/subadmin': typeof SubadminIndexRoute
   '/superadmin': typeof SuperadminIndexRoute
   '/api/public/geo': typeof ApiPublicGeoRoute
@@ -139,6 +147,7 @@ export interface FileRoutesById {
   '/subadmin/auth': typeof SubadminAuthRoute
   '/superadmin/login': typeof SuperadminLoginRoute
   '/superadmin/submissions': typeof SuperadminSubmissionsRoute
+  '/admin/': typeof AdminIndexRoute
   '/subadmin/': typeof SubadminIndexRoute
   '/superadmin/': typeof SuperadminIndexRoute
   '/api/public/geo': typeof ApiPublicGeoRoute
@@ -157,6 +166,7 @@ export interface FileRouteTypes {
     | '/subadmin/auth'
     | '/superadmin/login'
     | '/superadmin/submissions'
+    | '/admin/'
     | '/subadmin/'
     | '/superadmin/'
     | '/api/public/geo'
@@ -173,6 +183,7 @@ export interface FileRouteTypes {
     | '/subadmin/auth'
     | '/superadmin/login'
     | '/superadmin/submissions'
+    | '/admin'
     | '/subadmin'
     | '/superadmin'
     | '/api/public/geo'
@@ -189,6 +200,7 @@ export interface FileRouteTypes {
     | '/subadmin/auth'
     | '/superadmin/login'
     | '/superadmin/submissions'
+    | '/admin/'
     | '/subadmin/'
     | '/superadmin/'
     | '/api/public/geo'
@@ -206,6 +218,7 @@ export interface RootRouteChildren {
   SubadminAuthRoute: typeof SubadminAuthRoute
   SuperadminLoginRoute: typeof SuperadminLoginRoute
   SuperadminSubmissionsRoute: typeof SuperadminSubmissionsRoute
+  AdminIndexRoute: typeof AdminIndexRoute
   SubadminIndexRoute: typeof SubadminIndexRoute
   SuperadminIndexRoute: typeof SuperadminIndexRoute
   ApiPublicGeoRoute: typeof ApiPublicGeoRoute
@@ -254,6 +267,13 @@ declare module '@tanstack/react-router' {
       path: '/sitemap.xml'
       fullPath: '/sitemap.xml'
       preLoaderRoute: typeof SitemapDotxmlRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin/': {
+      id: '/admin/'
+      path: '/admin'
+      fullPath: '/admin/'
+      preLoaderRoute: typeof AdminIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/admin/auth': {
@@ -326,6 +346,7 @@ const rootRouteChildren: RootRouteChildren = {
   SubadminAuthRoute: SubadminAuthRoute,
   SuperadminLoginRoute: SuperadminLoginRoute,
   SuperadminSubmissionsRoute: SuperadminSubmissionsRoute,
+  AdminIndexRoute: AdminIndexRoute,
   SubadminIndexRoute: SubadminIndexRoute,
   SuperadminIndexRoute: SuperadminIndexRoute,
   ApiPublicGeoRoute: ApiPublicGeoRoute,
