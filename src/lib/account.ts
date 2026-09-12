@@ -7,6 +7,7 @@ export interface SubAdminInfo {
   name: string;
   username: string;
   mobile: string;
+  whatsapp: string;
   service_type: string;
   location: string;
   email: string;
@@ -17,6 +18,19 @@ export interface SubAdminInfo {
   require_instagram: boolean;
   require_share: boolean;
   full_report_price_inr: number;
+  admin_id: string | null;
+  is_active: boolean;
+  created_at: string;
+}
+
+export interface AdminInfo {
+  id: string;
+  company_name: string;
+  username: string;
+  mobile: string;
+  whatsapp: string;
+  email: string;
+  is_approved: boolean;
   is_active: boolean;
   created_at: string;
 }

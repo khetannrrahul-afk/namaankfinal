@@ -174,7 +174,7 @@ function SuperAdminPanel() {
           sub="Poore system ka master panel."
           right={
             <div className="flex gap-2">
-              <Link to="/admin" className={btnGhost}>
+              <Link to="/superadmin/submissions" className={btnGhost}>
                 Payment keys
               </Link>
               <button
