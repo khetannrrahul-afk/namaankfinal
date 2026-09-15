@@ -1,1 +1,0 @@
-REVOKE ALL ON FUNCTION public.admins_guard() FROM PUBLIC, anon, authenticated;
