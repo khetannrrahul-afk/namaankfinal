@@ -2,6 +2,7 @@ import { createFileRoute, useNavigate, Link } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { getAccount, homeFor } from "@/lib/account";
+import { usernameAvailable, validateAdminCode } from "@/lib/signup.functions";
 import { field, btnPrimary, PasswordInput } from "@/components/panel/Ui";
 import { OtpBox } from "@/components/panel/OtpBox";
 
@@ -65,8 +66,8 @@ function SubAdminAuth() {
     if (!USERNAME_RE.test(u)) return setUState("bad");
     setUState("checking");
     const t = setTimeout(async () => {
-      const { data } = await supabase.rpc("username_available", { _username: u });
-      setUState(data ? "free" : "taken");
+      const free = await usernameAvailable({ data: u });
+      setUState(free ? "free" : "taken");
     }, 400);
     return () => clearTimeout(t);
   }, [f.username, mode]);
@@ -77,8 +78,8 @@ function SubAdminAuth() {
     if (mode !== "up" || c.length === 0) return setAdminState({ kind: "idle" });
     setAdminState({ kind: "checking" });
     const t = setTimeout(async () => {
-      const { data } = await supabase.rpc("validate_admin_code", { _code: c });
-      const row = (data ?? [])[0];
+      const rows = await validateAdminCode({ data: c });
+      const row = rows[0];
       setAdminState(row ? { kind: "ok", name: row.company_name } : { kind: "bad" });
     }, 400);
     return () => clearTimeout(t);
