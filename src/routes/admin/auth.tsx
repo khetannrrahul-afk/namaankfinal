@@ -2,6 +2,7 @@ import { createFileRoute, useNavigate, Link } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { getAccount, homeFor } from "@/lib/account";
+import { usernameAvailable } from "@/lib/signup.functions";
 import { field, btnPrimary, PasswordInput } from "@/components/panel/Ui";
 import { OtpBox } from "@/components/panel/OtpBox";
 
