@@ -63,8 +63,8 @@ function AuthPage() {
     }
     setRefState({ status: "checking" });
     const t = setTimeout(async () => {
-      const { data } = await supabase.rpc("validate_referral_code", { _code: code });
-      const row = Array.isArray(data) ? data[0] : null;
+      const rows = await validateReferralCode({ data: code });
+      const row = rows[0] ?? null;
       setRefState(row ? { status: "ok", name: row.sub_admin_name } : { status: "bad" });
     }, 400);
     return () => clearTimeout(t);

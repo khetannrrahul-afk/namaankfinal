@@ -48,8 +48,8 @@ function AdminAuth() {
     if (!CODE_RE.test(u)) return setUState("bad");
     setUState("checking");
     const t = setTimeout(async () => {
-      const { data } = await supabase.rpc("username_available", { _username: u });
-      setUState(data ? "free" : "taken");
+      const free = await usernameAvailable({ data: u });
+      setUState(free ? "free" : "taken");
     }, 400);
     return () => clearTimeout(t);
   }, [f.username, mode]);

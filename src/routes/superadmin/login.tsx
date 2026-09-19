@@ -36,8 +36,8 @@ function SuperLogin() {
         navigate({ to: "/superadmin" });
         return;
       }
-      const { data } = await supabase.rpc("has_any_account");
-      setSetup(data === false);
+      const has = await hasAnyAccount();
+      setSetup(!has);
     })();
   }, [navigate]);
 
