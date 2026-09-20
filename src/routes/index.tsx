@@ -22,11 +22,11 @@ export const Route = createFileRoute("/")({
         property: "og:description",
         content: "Janm tarikh, samay aur sthaan se banaya gaya vistrit numerology report — 23 pages full life report ke saath.",
       },
-      { property: "og:url", content: "https://namaank2.lovable.app/" },
+      { property: "og:url", content: "https://namaankfinal.lovable.app/" },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
-    links: [{ rel: "canonical", href: "https://namaank2.lovable.app/" }],
+    links: [{ rel: "canonical", href: "https://namaankfinal.lovable.app/" }],
   }),
   component: Index,
 });

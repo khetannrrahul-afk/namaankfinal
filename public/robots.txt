@@ -13,4 +13,4 @@ Allow: /
 User-agent: *
 Allow: /
 
-Sitemap: https://namaank2.lovable.app/sitemap.xml
+Sitemap: https://namaankfinal.lovable.app/sitemap.xml
