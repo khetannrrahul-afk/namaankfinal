@@ -18,7 +18,7 @@ export const Route = createFileRoute("/admin/auth")({
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
-    links: [{ rel: "canonical", href: "https://namaank2.lovable.app/admin/auth" }],
+    links: [{ rel: "canonical", href: "https://namaankfinal.lovable.app/admin/auth" }],
   }),
   component: AdminAuth,
 });
