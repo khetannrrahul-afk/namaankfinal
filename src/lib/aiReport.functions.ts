@@ -171,7 +171,7 @@ export const generateAiReport = createServerFn({ method: "POST" })
         place: data.place,
         direction: data.direction,
         focus: data.focus,
-        segments,
+        segments: segments as unknown as Record<string, string>,
       })
       .select("id,created_at")
       .single();
