@@ -46,6 +46,7 @@ function ReportPage() {
   const [msg, setMsg] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
   const [busy, setBusy] = useState(false);
+  const [ai, setAi] = useState<{ input: GeneratorInput; segments: ReportSegments } | null>(null);
 
   const refresh = async () => {
     const a = await getAccount();
@@ -54,7 +55,7 @@ function ReportPage() {
       return null;
     }
     setMe(a);
-    const [{ data: subs }, { data: acts }] = await Promise.all([
+    const [{ data: subs }, { data: acts }, { data: aiRow }] = await Promise.all([
       supabase
         .from("namaank_submissions")
         .select("id,name,dob,birth_time,place,lang")
@@ -62,11 +63,34 @@ function ReportPage() {
         .eq("is_active", true)
         .order("created_at", { ascending: false }),
       supabase.from("social_actions").select("action").eq("user_id", a.userId),
+      supabase
+        .from("ai_reports")
+        .select("name,dob,birth_time,place,direction,focus,segments")
+        .eq("user_id", a.userId)
+        .order("created_at", { ascending: false })
+        .limit(1)
+        .maybeSingle(),
     ]);
     setRows((subs ?? []) as Row[]);
     setDoneActions((acts ?? []).map((r) => r.action as string));
+    setAi(
+      aiRow
+        ? {
+            input: {
+              name: aiRow.name,
+              dob: aiRow.dob,
+              time: aiRow.birth_time ?? "",
+              place: aiRow.place,
+              direction: aiRow.direction as Direction,
+              focus: aiRow.focus as FocusArea,
+            },
+            segments: aiRow.segments as unknown as ReportSegments,
+          }
+        : null,
+    );
     return a;
   };
+
 
   useEffect(() => {
     void (async () => {
