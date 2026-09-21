@@ -6,6 +6,8 @@ import { getMyReport, completeSocialAction } from "@/lib/report.functions";
 import type { Analysis } from "@/lib/numerology";
 import type { Lang } from "@/lib/langs/types";
 import Report from "@/components/namaank/Report";
+import AiReport from "@/components/namaank/AiReport";
+import type { Direction, FocusArea, GeneratorInput, ReportSegments } from "@/lib/aiReport.functions";
 import { PageHeader, Panel, Loading, btnAccent, btnGhost, btnPrimary } from "@/components/panel/Ui";
 
 export const Route = createFileRoute("/report")({
