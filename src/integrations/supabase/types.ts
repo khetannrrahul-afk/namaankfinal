@@ -61,6 +61,56 @@ export type Database = {
           },
         ]
       }
+      ai_reports: {
+        Row: {
+          birth_time: string | null
+          created_at: string
+          direction: string
+          dob: string
+          focus: string
+          id: string
+          name: string
+          place: string
+          segments: Json
+          submission_id: string | null
+          user_id: string
+        }
+        Insert: {
+          birth_time?: string | null
+          created_at?: string
+          direction: string
+          dob: string
+          focus: string
+          id?: string
+          name: string
+          place: string
+          segments: Json
+          submission_id?: string | null
+          user_id: string
+        }
+        Update: {
+          birth_time?: string | null
+          created_at?: string
+          direction?: string
+          dob?: string
+          focus?: string
+          id?: string
+          name?: string
+          place?: string
+          segments?: Json
+          submission_id?: string | null
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "ai_reports_submission_id_fkey"
+            columns: ["submission_id"]
+            isOneToOne: false
+            referencedRelation: "namaank_submissions"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       app_settings: {
         Row: {
           is_public: boolean
