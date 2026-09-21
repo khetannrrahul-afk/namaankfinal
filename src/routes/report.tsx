@@ -228,6 +228,24 @@ function ReportPage() {
           </Panel>
         )}
 
+        {me.access.short_unlocked && ai && (
+          <AiReport
+            input={ai.input}
+            segments={ai.segments}
+            {...(me.access.full_unlocked ? {} : { visible: ["numerology", "astrology", "affirmation"] as const })}
+          />
+        )}
+
+        {me.access.short_unlocked && !ai && (
+          <Panel title="Personalised report" sub="Numerology, jyotish, vastu aur focus guidance — aapke liye banayi gayi.">
+            <Link to="/generate" className={btnPrimary}>
+              Report generate karein
+            </Link>
+          </Panel>
+        )}
+
+
+
         <Panel title="Aapki kundliyan">
           {rows.length === 0 ? (
             <p className="text-xs text-muted-foreground">
