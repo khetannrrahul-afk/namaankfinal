@@ -55,7 +55,7 @@ function Index() {
     <main className="min-h-screen">
       <header className="hero-grad relative border-b border-border px-4 py-10 text-center">
         <h1 className="text-4xl font-bold tracking-tight glow-text sm:text-5xl">
-          NAMAANK — Free Numerology Report in Hindi
+          NAMAANK
         </h1>
         <p className="mt-2 text-sm tracking-[0.3em] text-accent uppercase">Har Ank ke Rahasye</p>
         <p className="mx-auto mt-3 max-w-md text-xs text-foreground/80">
