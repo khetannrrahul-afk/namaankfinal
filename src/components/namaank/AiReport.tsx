@@ -142,7 +142,7 @@ export default function AiReport({
       </header>
 
       <div className="divide-y divide-border/60">
-        {SEGMENTS.map((seg) => (
+        {shown.map((seg) => (
           <section key={seg.key} className="px-5 py-6 sm:px-8">
             <div className="flex items-baseline gap-3">
               <span className="text-xs font-semibold tracking-[0.2em] text-accent">{seg.no}</span>
