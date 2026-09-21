@@ -60,12 +60,17 @@ export default function AiReport({
   input,
   segments,
   onReset,
+  visible,
 }: {
   input: GeneratorInput;
   segments: ReportSegments;
   onReset?: (() => void) | undefined;
+  /** Sirf ye segments dikhane hain (short report gate ke liye). */
+  visible?: (keyof ReportSegments)[] | undefined;
 }) {
   const [copied, setCopied] = useState(false);
+  const shown = visible ? SEGMENTS.filter((s) => visible.includes(s.key)) : SEGMENTS;
+
 
   const copy = async () => {
     try {
