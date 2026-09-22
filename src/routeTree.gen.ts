@@ -11,6 +11,7 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AuthRouteImport } from './routes/auth'
+import { Route as CalculatorRouteImport } from './routes/calculator'
 import { Route as GenerateRouteImport } from './routes/generate'
 import { Route as MeRouteImport } from './routes/me'
 import { Route as PayRouteImport } from './routes/pay'
@@ -34,6 +35,11 @@ const IndexRoute = IndexRouteImport.update({
 const AuthRoute = AuthRouteImport.update({
   id: '/auth',
   path: '/auth',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CalculatorRoute = CalculatorRouteImport.update({
+  id: '/calculator',
+  path: '/calculator',
   getParentRoute: () => rootRouteImport,
 } as any)
 const GenerateRoute = GenerateRouteImport.update({
@@ -110,6 +116,7 @@ const ApiPublicTelegramSubRoute = ApiPublicTelegramSubRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
+  '/calculator': typeof CalculatorRoute
   '/generate': typeof GenerateRoute
   '/me': typeof MeRoute
   '/pay': typeof PayRoute
@@ -128,6 +135,7 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
+  '/calculator': typeof CalculatorRoute
   '/generate': typeof GenerateRoute
   '/me': typeof MeRoute
   '/pay': typeof PayRoute
@@ -147,6 +155,7 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
+  '/calculator': typeof CalculatorRoute
   '/generate': typeof GenerateRoute
   '/me': typeof MeRoute
   '/pay': typeof PayRoute
@@ -167,6 +176,7 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/auth'
+    | '/calculator'
     | '/generate'
     | '/me'
     | '/pay'
@@ -185,6 +195,7 @@ export interface FileRouteTypes {
   to:
     | '/'
     | '/auth'
+    | '/calculator'
     | '/generate'
     | '/me'
     | '/pay'
@@ -203,6 +214,7 @@ export interface FileRouteTypes {
     | '__root__'
     | '/'
     | '/auth'
+    | '/calculator'
     | '/generate'
     | '/me'
     | '/pay'
@@ -222,6 +234,7 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AuthRoute: typeof AuthRoute
+  CalculatorRoute: typeof CalculatorRoute
   GenerateRoute: typeof GenerateRoute
   MeRoute: typeof MeRoute
   PayRoute: typeof PayRoute
@@ -252,6 +265,13 @@ declare module '@tanstack/react-router' {
       path: '/auth'
       fullPath: '/auth'
       preLoaderRoute: typeof AuthRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/calculator': {
+      id: '/calculator'
+      path: '/calculator'
+      fullPath: '/calculator'
+      preLoaderRoute: typeof CalculatorRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/generate': {
@@ -358,6 +378,7 @@ declare module '@tanstack/react-router' {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AuthRoute: AuthRoute,
+  CalculatorRoute: CalculatorRoute,
   GenerateRoute: GenerateRoute,
   MeRoute: MeRoute,
   PayRoute: PayRoute,
