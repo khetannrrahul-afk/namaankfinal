@@ -61,6 +61,12 @@ function Index() {
         <p className="mx-auto mt-3 max-w-md text-xs text-foreground/80">
           Chaldean + Indian (Lo Shu) numerology calculator in Hindi · janm tarikh, samay aur sthaan par aadharit
         </p>
+        <Link
+          to="/calculator"
+          className="mt-4 inline-flex items-center justify-center rounded-xl border border-accent/50 bg-accent/10 px-4 py-2 text-xs font-semibold text-accent transition hover:bg-accent/20"
+        >
+          Name Number Calculator
+        </Link>
       </header>
 
 
