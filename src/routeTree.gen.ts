@@ -12,13 +12,19 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AuthRouteImport } from './routes/auth'
 import { Route as CalculatorRouteImport } from './routes/calculator'
+import { Route as ConsultationRouteImport } from './routes/consultation'
+import { Route as ContactRouteImport } from './routes/contact'
 import { Route as GenerateRouteImport } from './routes/generate'
 import { Route as MeRouteImport } from './routes/me'
 import { Route as PayRouteImport } from './routes/pay'
 import { Route as ReportRouteImport } from './routes/report'
+import { Route as ServicesRouteImport } from './routes/services'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as AdminIndexRouteImport } from './routes/admin/index'
 import { Route as AdminAuthRouteImport } from './routes/admin/auth'
+import { Route as ServicesAstrologyRouteImport } from './routes/services.astrology'
+import { Route as ServicesJyotishRouteImport } from './routes/services.jyotish'
+import { Route as ServicesNumerologyRouteImport } from './routes/services.numerology'
 import { Route as SubadminIndexRouteImport } from './routes/subadmin/index'
 import { Route as SubadminAuthRouteImport } from './routes/subadmin/auth'
 import { Route as SuperadminIndexRouteImport } from './routes/superadmin/index'
@@ -42,6 +48,16 @@ const CalculatorRoute = CalculatorRouteImport.update({
   path: '/calculator',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ConsultationRoute = ConsultationRouteImport.update({
+  id: '/consultation',
+  path: '/consultation',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ContactRoute = ContactRouteImport.update({
+  id: '/contact',
+  path: '/contact',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const GenerateRoute = GenerateRouteImport.update({
   id: '/generate',
   path: '/generate',
@@ -62,6 +78,11 @@ const ReportRoute = ReportRouteImport.update({
   path: '/report',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ServicesRoute = ServicesRouteImport.update({
+  id: '/services',
+  path: '/services',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
   id: '/sitemap.xml',
   path: '/sitemap.xml',
@@ -76,6 +97,21 @@ const AdminAuthRoute = AdminAuthRouteImport.update({
   id: '/admin/auth',
   path: '/admin/auth',
   getParentRoute: () => rootRouteImport,
+} as any)
+const ServicesAstrologyRoute = ServicesAstrologyRouteImport.update({
+  id: '/astrology',
+  path: '/astrology',
+  getParentRoute: () => ServicesRoute,
+} as any)
+const ServicesJyotishRoute = ServicesJyotishRouteImport.update({
+  id: '/jyotish',
+  path: '/jyotish',
+  getParentRoute: () => ServicesRoute,
+} as any)
+const ServicesNumerologyRoute = ServicesNumerologyRouteImport.update({
+  id: '/numerology',
+  path: '/numerology',
+  getParentRoute: () => ServicesRoute,
 } as any)
 const SubadminIndexRoute = SubadminIndexRouteImport.update({
   id: '/subadmin/',
@@ -117,12 +153,18 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
   '/calculator': typeof CalculatorRoute
+  '/consultation': typeof ConsultationRoute
+  '/contact': typeof ContactRoute
   '/generate': typeof GenerateRoute
   '/me': typeof MeRoute
   '/pay': typeof PayRoute
   '/report': typeof ReportRoute
+  '/services': typeof ServicesRouteWithChildren
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/admin/auth': typeof AdminAuthRoute
+  '/services/astrology': typeof ServicesAstrologyRoute
+  '/services/jyotish': typeof ServicesJyotishRoute
+  '/services/numerology': typeof ServicesNumerologyRoute
   '/subadmin/auth': typeof SubadminAuthRoute
   '/superadmin/login': typeof SuperadminLoginRoute
   '/superadmin/submissions': typeof SuperadminSubmissionsRoute
@@ -136,12 +178,18 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
   '/calculator': typeof CalculatorRoute
+  '/consultation': typeof ConsultationRoute
+  '/contact': typeof ContactRoute
   '/generate': typeof GenerateRoute
   '/me': typeof MeRoute
   '/pay': typeof PayRoute
   '/report': typeof ReportRoute
+  '/services': typeof ServicesRouteWithChildren
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/admin/auth': typeof AdminAuthRoute
+  '/services/astrology': typeof ServicesAstrologyRoute
+  '/services/jyotish': typeof ServicesJyotishRoute
+  '/services/numerology': typeof ServicesNumerologyRoute
   '/subadmin/auth': typeof SubadminAuthRoute
   '/superadmin/login': typeof SuperadminLoginRoute
   '/superadmin/submissions': typeof SuperadminSubmissionsRoute
@@ -156,12 +204,18 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
   '/calculator': typeof CalculatorRoute
+  '/consultation': typeof ConsultationRoute
+  '/contact': typeof ContactRoute
   '/generate': typeof GenerateRoute
   '/me': typeof MeRoute
   '/pay': typeof PayRoute
   '/report': typeof ReportRoute
+  '/services': typeof ServicesRouteWithChildren
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/admin/auth': typeof AdminAuthRoute
+  '/services/astrology': typeof ServicesAstrologyRoute
+  '/services/jyotish': typeof ServicesJyotishRoute
+  '/services/numerology': typeof ServicesNumerologyRoute
   '/subadmin/auth': typeof SubadminAuthRoute
   '/superadmin/login': typeof SuperadminLoginRoute
   '/superadmin/submissions': typeof SuperadminSubmissionsRoute
@@ -177,12 +231,18 @@ export interface FileRouteTypes {
     | '/'
     | '/auth'
     | '/calculator'
+    | '/consultation'
+    | '/contact'
     | '/generate'
     | '/me'
     | '/pay'
     | '/report'
+    | '/services'
     | '/sitemap.xml'
     | '/admin/auth'
+    | '/services/astrology'
+    | '/services/jyotish'
+    | '/services/numerology'
     | '/subadmin/auth'
     | '/superadmin/login'
     | '/superadmin/submissions'
@@ -196,12 +256,18 @@ export interface FileRouteTypes {
     | '/'
     | '/auth'
     | '/calculator'
+    | '/consultation'
+    | '/contact'
     | '/generate'
     | '/me'
     | '/pay'
     | '/report'
+    | '/services'
     | '/sitemap.xml'
     | '/admin/auth'
+    | '/services/astrology'
+    | '/services/jyotish'
+    | '/services/numerology'
     | '/subadmin/auth'
     | '/superadmin/login'
     | '/superadmin/submissions'
@@ -215,12 +281,18 @@ export interface FileRouteTypes {
     | '/'
     | '/auth'
     | '/calculator'
+    | '/consultation'
+    | '/contact'
     | '/generate'
     | '/me'
     | '/pay'
     | '/report'
+    | '/services'
     | '/sitemap.xml'
     | '/admin/auth'
+    | '/services/astrology'
+    | '/services/jyotish'
+    | '/services/numerology'
     | '/subadmin/auth'
     | '/superadmin/login'
     | '/superadmin/submissions'
@@ -235,10 +307,13 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AuthRoute: typeof AuthRoute
   CalculatorRoute: typeof CalculatorRoute
+  ConsultationRoute: typeof ConsultationRoute
+  ContactRoute: typeof ContactRoute
   GenerateRoute: typeof GenerateRoute
   MeRoute: typeof MeRoute
   PayRoute: typeof PayRoute
   ReportRoute: typeof ReportRoute
+  ServicesRoute: typeof ServicesRouteWithChildren
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
   AdminAuthRoute: typeof AdminAuthRoute
   SubadminAuthRoute: typeof SubadminAuthRoute
@@ -274,6 +349,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof CalculatorRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/consultation': {
+      id: '/consultation'
+      path: '/consultation'
+      fullPath: '/consultation'
+      preLoaderRoute: typeof ConsultationRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/contact': {
+      id: '/contact'
+      path: '/contact'
+      fullPath: '/contact'
+      preLoaderRoute: typeof ContactRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/generate': {
       id: '/generate'
       path: '/generate'
@@ -302,6 +391,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ReportRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/services': {
+      id: '/services'
+      path: '/services'
+      fullPath: '/services'
+      preLoaderRoute: typeof ServicesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/sitemap.xml': {
       id: '/sitemap.xml'
       path: '/sitemap.xml'
@@ -322,6 +418,27 @@ declare module '@tanstack/react-router' {
       fullPath: '/admin/auth'
       preLoaderRoute: typeof AdminAuthRouteImport
       parentRoute: typeof rootRouteImport
+    }
+    '/services/astrology': {
+      id: '/services/astrology'
+      path: '/astrology'
+      fullPath: '/services/astrology'
+      preLoaderRoute: typeof ServicesAstrologyRouteImport
+      parentRoute: typeof ServicesRoute
+    }
+    '/services/jyotish': {
+      id: '/services/jyotish'
+      path: '/jyotish'
+      fullPath: '/services/jyotish'
+      preLoaderRoute: typeof ServicesJyotishRouteImport
+      parentRoute: typeof ServicesRoute
+    }
+    '/services/numerology': {
+      id: '/services/numerology'
+      path: '/numerology'
+      fullPath: '/services/numerology'
+      preLoaderRoute: typeof ServicesNumerologyRouteImport
+      parentRoute: typeof ServicesRoute
     }
     '/subadmin/': {
       id: '/subadmin/'
@@ -375,14 +492,33 @@ declare module '@tanstack/react-router' {
   }
 }
 
+interface ServicesRouteChildren {
+  ServicesAstrologyRoute: typeof ServicesAstrologyRoute
+  ServicesJyotishRoute: typeof ServicesJyotishRoute
+  ServicesNumerologyRoute: typeof ServicesNumerologyRoute
+}
+
+const ServicesRouteChildren: ServicesRouteChildren = {
+  ServicesAstrologyRoute: ServicesAstrologyRoute,
+  ServicesJyotishRoute: ServicesJyotishRoute,
+  ServicesNumerologyRoute: ServicesNumerologyRoute,
+}
+
+const ServicesRouteWithChildren = ServicesRoute._addFileChildren(
+  ServicesRouteChildren,
+)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AuthRoute: AuthRoute,
   CalculatorRoute: CalculatorRoute,
+  ConsultationRoute: ConsultationRoute,
+  ContactRoute: ContactRoute,
   GenerateRoute: GenerateRoute,
   MeRoute: MeRoute,
   PayRoute: PayRoute,
   ReportRoute: ReportRoute,
+  ServicesRoute: ServicesRouteWithChildren,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
   AdminAuthRoute: AdminAuthRoute,
   SubadminAuthRoute: SubadminAuthRoute,
