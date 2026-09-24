@@ -21,7 +21,7 @@ export const Route = createFileRoute("/calculator")({
 type Tab="life"|"name"|"sign";
 const meanings:Record<number,string>={1:"Independent leadership aur initiative",2:"Sensitivity, balance aur partnership",3:"Creativity, expression aur optimism",4:"Discipline, structure aur practical growth",5:"Freedom, adaptability aur communication",6:"Care, harmony aur responsibility",7:"Introspection, wisdom aur spiritual search",8:"Ambition, authority aur material mastery",9:"Compassion, courage aur completion"};
 const zodiac=["Capricorn","Aquarius","Pisces","Aries","Taurus","Gemini","Cancer","Leo","Virgo","Libra","Scorpio","Sagittarius"];
-function getSun(dob:string){if(!dob)return "";const[,m,d]=dob.split("-").map(Number);const cut=[20,19,21,20,21,21,23,23,23,23,22,22];const i=(m-1+(d>=(cut[m-1]??31)?1:0))%12;return zodiac[i]??""}
+function getSun(dob:string){if(!dob)return "";const[,mm,dd]=dob.split("-").map(Number);const m=mm??1,d=dd??1;const cut=[20,19,21,20,21,21,23,23,23,23,22,22];const i=(m-1+(d>=(cut[m-1]??31)?1:0))%12;return zodiac[i]??""}
 function approximateMoon(dob:string,time:string,place:string){if(!dob)return "";const days=Math.floor(new Date(`${dob}T${time||"12:00"}:00Z`).getTime()/86400000);const placeValue=[...place].reduce((a,c)=>a+c.charCodeAt(0),0);return zodiac[((days+Math.floor(placeValue/90))%12+12)%12]??""}
 
 function CalculatorPage(){
